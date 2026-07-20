@@ -9,12 +9,12 @@ import cookieImg from '../assets/cookie.png';
 import './Home.css';
 
 const heroCookies = [
-  { className: 'home-hero-cookie-1', width: 'clamp(88px, 11vw, 150px)', top: '10%', left: '5%', rotate: -18 },
-  { className: 'home-hero-cookie-2', width: 'clamp(72px, 9vw, 120px)', top: '18%', right: '6%', rotate: 14 },
-  { className: 'home-hero-cookie-3', width: 'clamp(96px, 12vw, 160px)', bottom: '16%', left: '8%', rotate: 8 },
-  { className: 'home-hero-cookie-4', width: 'clamp(64px, 8vw, 110px)', bottom: '22%', right: '10%', rotate: -22 },
-  { className: 'home-hero-cookie-5', width: 'clamp(56px, 7vw, 92px)', top: '42%', left: '14%', rotate: 12 },
-  { className: 'home-hero-cookie-6', width: 'clamp(60px, 7vw, 98px)', top: '38%', right: '14%', rotate: -10 },
+  { className: 'home-hero-cookie-1', width: 'clamp(120px, 16vw, 220px)', top: '8%', left: '3%', rotate: -18 },
+  { className: 'home-hero-cookie-2', width: 'clamp(104px, 13vw, 180px)', top: '14%', right: '4%', rotate: 14 },
+  { className: 'home-hero-cookie-3', width: 'clamp(128px, 17vw, 230px)', bottom: '12%', left: '5%', rotate: 8 },
+  { className: 'home-hero-cookie-4', width: 'clamp(96px, 12vw, 165px)', bottom: '18%', right: '6%', rotate: -22 },
+  { className: 'home-hero-cookie-5', width: 'clamp(88px, 11vw, 150px)', top: '40%', left: '10%', rotate: 12 },
+  { className: 'home-hero-cookie-6', width: 'clamp(92px, 11vw, 155px)', top: '36%', right: '10%', rotate: -10 },
 ];
 
 function HeroCookies() {

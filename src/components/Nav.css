@@ -29,6 +29,7 @@
 }
 .nav-compact {
   gap: 16px;
+  justify-content: space-between;
 }
 .nav-full.nav-hidden {
   opacity: 0;
@@ -60,6 +61,25 @@
 
 .nav-logo-compact {
   height: clamp(48px, 7vw, 60px);
+}
+
+.nav-logo-menu {
+  height: clamp(52px, 10vw, 68px);
+}
+
+.nav-menu-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-menu-logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .nav-tabs {
@@ -285,6 +305,25 @@
   .nav-full,
   .nav-compact {
     gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-sticky {
+    padding: 16px 16px 0;
+  }
+
+  .nav-full,
+  .nav-compact {
+    gap: 12px;
+  }
+
+  .nav-logo-compact {
+    height: clamp(54px, 12vw, 68px);
+  }
+
+  .nav-compact-pill {
+    margin-left: auto;
   }
 }
 
