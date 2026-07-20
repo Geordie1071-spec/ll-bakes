@@ -1,3 +1,13 @@
+import strawberryImg from '../assets/products/strawberry.png';
+import chocImg from '../assets/products/choc.png';
+import birthdayImg from '../assets/products/birthday.png';
+import chocChipImg from '../assets/products/choc-chip.png';
+import vanillaImg from '../assets/products/vanilla.png';
+import redvelvetImg from '../assets/products/redvelvet.png';
+import berrytartImg from '../assets/products/berrytart.png';
+import croissantImg from '../assets/products/croissant.png';
+import painchocImg from '../assets/products/painchoc.png';
+
 export type Category = 'Cakes' | 'Cookies' | 'Cupcakes' | 'Pastries';
 
 export interface Product {
@@ -8,6 +18,7 @@ export interface Product {
   cat: Category;
   tag: string;
   placeholder: string;
+  image: string;
 }
 
 export const PRODUCT_CARD_COLOR = '#231F20';
@@ -22,15 +33,15 @@ export const categoryColor: Record<Category, string> = {
 export const categories: Array<'All' | Category> = ['All', 'Cakes', 'Cookies', 'Cupcakes', 'Pastries'];
 
 export const products: Product[] = [
-  { id: 'strawberry', name: 'Strawberry Dream Cake', sub: 'Serves 8 · 3 layers', price: 42, cat: 'Cakes', tag: 'Bestseller', placeholder: 'cake photo' },
-  { id: 'choc', name: 'Choc Fudge Cake', sub: 'Serves 10 · 4 layers', price: 48, cat: 'Cakes', tag: 'New', placeholder: 'cake photo' },
-  { id: 'birthday', name: 'Birthday Cookie', sub: 'Box of 6 · 4oz', price: 29, cat: 'Cookies', tag: 'Bestseller', placeholder: 'cookie photo' },
-  { id: 'choc-chip', name: 'Choc Chip Cookie', sub: 'Box of 12', price: 24, cat: 'Cookies', tag: '', placeholder: 'cookie photo' },
-  { id: 'vanilla', name: 'Vanilla Cupcake', sub: 'Single · buttercream', price: 5, cat: 'Cupcakes', tag: 'Bestseller', placeholder: 'cupcake photo' },
-  { id: 'redvelvet', name: 'Red Velvet Cupcake', sub: 'Single · cream cheese', price: 6, cat: 'Cupcakes', tag: '', placeholder: 'cupcake photo' },
-  { id: 'berrytart', name: 'Berry Tart', sub: 'Single · fresh fruit', price: 7, cat: 'Pastries', tag: '', placeholder: 'tart photo' },
-  { id: 'croissant', name: 'Butter Croissant', sub: 'Single · flaky', price: 4, cat: 'Pastries', tag: 'Bestseller', placeholder: 'croissant photo' },
-  { id: 'painchoc', name: 'Pain au Chocolat', sub: 'Single · dark choc', price: 5, cat: 'Pastries', tag: '', placeholder: 'pastry photo' },
+  { id: 'strawberry', name: 'Strawberry Dream Cake', sub: 'Serves 8 · 3 layers', price: 42, cat: 'Cakes', tag: 'Bestseller', placeholder: 'cake photo', image: strawberryImg },
+  { id: 'choc', name: 'Choc Fudge Cake', sub: 'Serves 10 · 4 layers', price: 48, cat: 'Cakes', tag: 'New', placeholder: 'cake photo', image: chocImg },
+  { id: 'birthday', name: 'Birthday Cookie', sub: 'Box of 6 · 4oz', price: 29, cat: 'Cookies', tag: 'Bestseller', placeholder: 'cookie photo', image: birthdayImg },
+  { id: 'choc-chip', name: 'Choc Chip Cookie', sub: 'Box of 12', price: 24, cat: 'Cookies', tag: '', placeholder: 'cookie photo', image: chocChipImg },
+  { id: 'vanilla', name: 'Vanilla Cupcake', sub: 'Single · buttercream', price: 5, cat: 'Cupcakes', tag: 'Bestseller', placeholder: 'cupcake photo', image: vanillaImg },
+  { id: 'redvelvet', name: 'Red Velvet Cupcake', sub: 'Single · cream cheese', price: 6, cat: 'Cupcakes', tag: '', placeholder: 'cupcake photo', image: redvelvetImg },
+  { id: 'berrytart', name: 'Berry Tart', sub: 'Single · fresh fruit', price: 7, cat: 'Pastries', tag: '', placeholder: 'tart photo', image: berrytartImg },
+  { id: 'croissant', name: 'Butter Croissant', sub: 'Single · flaky', price: 4, cat: 'Pastries', tag: 'Bestseller', placeholder: 'croissant photo', image: croissantImg },
+  { id: 'painchoc', name: 'Pain au Chocolat', sub: 'Single · dark choc', price: 5, cat: 'Pastries', tag: '', placeholder: 'pastry photo', image: painchocImg },
 ];
 
 export function getProduct(id: string | undefined): Product | undefined {

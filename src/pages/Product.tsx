@@ -8,15 +8,11 @@ import { getProduct, products, sizeLabels, sizeRatios, tasteNotesFor } from '../
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
-const shots = ['main photo', 'slice photo', 'top-down photo', 'detail photo'];
-
 export default function Product() {
   const { id } = useParams<{ id: string }>();
   const product = getProduct(id);
   const { addToCart } = useCart();
 
-  const [shot, setShot] = useState(0);
-  const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
   const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
 
@@ -36,16 +32,6 @@ export default function Product() {
 
   const onAdd = () => addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty });
 
-  const goPrev = () => {
-    setSlideDir('prev');
-    setShot((s) => (s + shots.length - 1) % shots.length);
-  };
-
-  const goNext = () => {
-    setSlideDir('next');
-    setShot((s) => (s + 1) % shots.length);
-  };
-
   return (
     <div className="page-overflow-clip">
       <Nav />
@@ -60,18 +46,13 @@ export default function Product() {
 
         <div className="product-gallery">
           <div className="product-gallery-main">
-            <div key={shot} className={`product-gallery-slide product-gallery-slide-${slideDir}`}>
-              <ImageSlot shape="rect" placeholder={`${product.placeholder} — ${shots[shot]}`} />
+            <div className="product-gallery-slide product-gallery-slide-next">
+              {product.image ? (
+                <img src={product.image} alt={product.name} className="product-gallery-photo" />
+              ) : (
+                <ImageSlot shape="rect" placeholder={product.placeholder} />
+              )}
             </div>
-            <div className="product-gallery-nav">
-              <button onClick={goPrev} aria-label="Previous" type="button">
-                &larr;
-              </button>
-              <button onClick={goNext} aria-label="Next" type="button">
-                &rarr;
-              </button>
-            </div>
-            <span className="product-gallery-tag">{shots[shot]}</span>
           </div>
         </div>
 
@@ -130,7 +111,7 @@ export default function Product() {
         <div className="product-cards-grid">
           {related.map((p) => (
             <div key={p.id} className="product-cards-grid-item">
-              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} />
+              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} image={p.image} />
             </div>
           ))}
         </div>

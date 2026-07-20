@@ -11,9 +11,10 @@ interface ProductCardProps {
   price: number;
   cardBg?: string;
   placeholder: string;
+  image?: string;
 }
 
-export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CARD_COLOR, placeholder }: ProductCardProps) {
+export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CARD_COLOR, placeholder, image }: ProductCardProps) {
   const { addToCart } = useCart();
   const href = `/product/${id}`;
 
@@ -28,7 +29,11 @@ export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CAR
         </h3>
       </div>
       <Link to={href} className="product-card-image">
-        <ImageSlot shape="rect" placeholder={placeholder} />
+        {image ? (
+          <img src={image} alt={name} className="product-card-photo" loading="lazy" />
+        ) : (
+          <ImageSlot shape="rect" placeholder={placeholder} />
+        )}
       </Link>
       <div className="product-card-actions">
         <button className="product-card-add" onClick={() => addToCart({ id, name, sub, price })} type="button">

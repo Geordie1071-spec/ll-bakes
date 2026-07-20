@@ -28,7 +28,7 @@ export default function Shop() {
         <div className="product-cards-grid">
           {products.map((p) => (
             <div key={p.id} className="product-cards-grid-item">
-              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} />
+              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} image={p.image} />
             </div>
           ))}
         </div>

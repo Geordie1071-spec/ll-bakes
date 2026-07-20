@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import SplitHeading from '../components/SplitHeading';
 import BuildText from '../components/BuildText';
 import cookieImg from '../assets/cookie.png';
+import { getProduct } from '../lib/products';
 import './Home.css';
 
 const heroCookies = [
@@ -40,11 +41,8 @@ function HeroCookies() {
   );
 }
 
-const favs = [
-  { id: 'strawberry', name: 'Strawberry Dream Cake', sub: 'Serves 8 · 3 layers', price: 48, placeholder: 'Drop cake photo' },
-  { id: 'brown-butter-cookies', name: 'Brown Butter Cookies', sub: 'Box of six', price: 18, placeholder: 'Drop cookie photo' },
-  { id: 'almond-croissant', name: 'Almond Croissant', sub: 'Baked at dawn', price: 6, placeholder: 'Drop pastry photo' },
-];
+const favIds = ['strawberry', 'choc-chip', 'croissant'] as const;
+const favs = favIds.map((id) => getProduct(id)!);
 
 const faqs = [
   { q: 'How far in advance should I order a custom cake?', a: 'For custom and celebration cakes we recommend at least 5–7 days’ notice so we can source the freshest ingredients and design something special. Wedding cakes, please reach out 4–6 weeks ahead.' },
