@@ -72,8 +72,10 @@ function ReviewsCarousel() {
     let moved = false;
     let startX = 0;
     let scroll = 0;
+    let leftover = 0;
     const half = () => dz.scrollWidth / 2;
-    const speed = 0.22;
+    // ~0.28px/frame ≈ half the original 0.5 speed, with subpixel accumulation
+    const speed = 0.28;
 
     const onDown = (e: PointerEvent) => {
       down = true;
@@ -100,14 +102,19 @@ function ReviewsCarousel() {
     dz.addEventListener('pointermove', onMove);
     dz.addEventListener('pointerup', onUp);
     dz.addEventListener('pointercancel', onUp);
-    dz.addEventListener('pointerleave', onUp);
+    dz.addEventListener('lostpointercapture', onUp);
     dz.addEventListener('click', onClickCapture, true);
 
     let raf = 0;
     const step = () => {
       if (!down) {
-        dz.scrollLeft += speed;
-        if (dz.scrollLeft >= half()) dz.scrollLeft -= half();
+        leftover += speed;
+        const stepPx = Math.floor(leftover);
+        if (stepPx > 0) {
+          leftover -= stepPx;
+          dz.scrollLeft += stepPx;
+          if (dz.scrollLeft >= half()) dz.scrollLeft -= half();
+        }
       }
       raf = requestAnimationFrame(step);
     };
@@ -119,7 +126,7 @@ function ReviewsCarousel() {
       dz.removeEventListener('pointermove', onMove);
       dz.removeEventListener('pointerup', onUp);
       dz.removeEventListener('pointercancel', onUp);
-      dz.removeEventListener('pointerleave', onUp);
+      dz.removeEventListener('lostpointercapture', onUp);
       dz.removeEventListener('click', onClickCapture, true);
     };
   }, []);

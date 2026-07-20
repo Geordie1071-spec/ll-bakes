@@ -245,22 +245,23 @@
 
 .product-add-btn {
   cursor: pointer;
-  flex: none;
+  flex: 1 1 auto;
+  min-width: 0;
   width: auto;
   margin-top: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
   font-family: 'Boogaloo', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: .5px;
   text-transform: uppercase;
   color: #F5ECDD;
   background: #231F20;
   border: none;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-radius: 14px;
   box-shadow: 4px 4px 0 #000;
   white-space: nowrap;
