@@ -1,0 +1,129 @@
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 625 / 735;
+  border-radius: 24px;
+  padding: 24px 24px 20px;
+  overflow: hidden;
+}
+
+.product-card-ring {
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(35,31,32,.28);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.product-card-head {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.product-card-title {
+  font-family: 'Boogaloo', sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 2.6vw, 40px);
+  line-height: .95;
+  margin: 0;
+  color: #231F20;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px currentColor;
+}
+
+.product-card-sub {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #231F20;
+  opacity: .6;
+}
+
+.product-card-image {
+  flex: 1;
+  position: relative;
+  display: block;
+  margin: 14px 0;
+  min-height: 0;
+  text-decoration: none;
+}
+
+.product-card-tag {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 3;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #231F20;
+  background: #F5ECDD;
+  padding: 6px 13px;
+  border-radius: 999px;
+}
+
+.product-card-actions {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.product-card-add {
+  flex: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: 'Boogaloo', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #231F20;
+  background: #F5ECDD;
+  border: none;
+  padding: 16px 18px;
+  border-radius: 14px;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.product-card-add:hover {
+  transform: translateY(-3px);
+}
+.product-card-add:active {
+  transform: scale(.95);
+}
+
+.product-card-view {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: 'Boogaloo', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #231F20;
+  background: transparent;
+  border: 2px solid rgba(35,31,32,.45);
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: background .2s, color .2s, transform .18s cubic-bezier(.34,1.56,.64,1);
+}
+.product-card-view:hover {
+  background: #231F20;
+  color: #F5ECDD;
+}
+.product-card-view:active {
+  transform: scale(.96);
+}
