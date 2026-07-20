@@ -80,17 +80,19 @@
   text-align: center;
   padding: 80px 20px;
   color: #231F20;
-  opacity: .55;
+  opacity: .88;
 }
 .cart-empty-title {
   font-family: 'Boogaloo', sans-serif;
-  font-size: 40px;
+  font-size: 56px;
   color: #E83F6A;
-  opacity: .7;
+  opacity: 1;
 }
 .cart-empty p {
-  font-size: 16px;
-  margin-top: 8px;
+  font-size: 22px;
+  margin-top: 12px;
+  opacity: 1;
+  line-height: 1.35;
 }
 
 .cart-line {

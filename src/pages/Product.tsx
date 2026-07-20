@@ -4,7 +4,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ImageSlot from '../components/ImageSlot';
-import { getProduct, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
+import { getProduct, products, tasteNotesFor } from '../lib/products';
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
@@ -31,7 +31,6 @@ export default function Product() {
   const product = getProduct(id);
   const { addToCart } = useCart();
 
-  const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
   const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
   const [galleryKey, setGalleryKey] = useState(0);
@@ -43,15 +42,11 @@ export default function Product() {
 
   if (!product) return <Navigate to="/shop" replace />;
 
-  const isCake = product.cat === 'Cakes';
-  const sizePrice = isCake ? Math.round(product.price * sizeRatios[sizeIdx]) : product.price;
-  const total = sizePrice * qty;
+  const total = product.price * qty;
   const tasteNotes = tasteNotesFor(product.cat);
-  const variantId = isCake ? `${product.id}-${sizeIdx}` : product.id;
-  const variantSub = isCake ? sizeLabels[sizeIdx] : product.sub;
 
   const onAdd = () =>
-    addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty, image: product.image });
+    addToCart({ id: product.id, name: product.name, sub: product.sub, price: product.price, qty, image: product.image });
 
   const goPrev = () => {
     setSlideDir('prev');
@@ -115,18 +110,6 @@ export default function Product() {
           </div>
 
           <div className="product-controls">
-            {isCake && (
-              <div className="product-size-select-wrap">
-                <select value={sizeIdx} onChange={(e) => setSizeIdx(Number(e.target.value))}>
-                  {sizeLabels.map((label, i) => (
-                    <option key={label} value={i}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-                <span className="product-size-caret">&#9662;</span>
-              </div>
-            )}
             <div className="product-qty-stepper">
               <button onClick={() => setQty((q) => Math.max(1, q - 1))} type="button">
                 &minus;
@@ -136,12 +119,12 @@ export default function Product() {
                 +
               </button>
             </div>
-          </div>
 
-          <button onClick={onAdd} className="product-add-btn" type="button">
-            <span>Add to Cart</span>
-            <span className="product-card-price">${total}.00</span>
-          </button>
+            <button onClick={onAdd} className="product-add-btn" type="button">
+              <span>Add to Cart</span>
+              <span className="product-card-price">${total}.00</span>
+            </button>
+          </div>
         </div>
       </section>
 
