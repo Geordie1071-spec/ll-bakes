@@ -6,6 +6,7 @@
   border-radius: 24px;
   padding: 24px 24px 20px;
   overflow: hidden;
+  box-shadow: 0 14px 36px rgba(35,31,32,.22);
 }
 
 .product-card-ring {
@@ -59,13 +60,14 @@
   top: 8px;
   z-index: 3;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #231F20;
   background: #F5ECDD;
-  padding: 6px 13px;
+  padding: 8px 14px;
   border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(35,31,32,.18);
 }
 
 .product-card-actions {
@@ -84,7 +86,7 @@
   gap: 8px;
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #231F20;
@@ -92,10 +94,12 @@
   border: none;
   padding: 16px 18px;
   border-radius: 14px;
-  transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 6px 16px rgba(35,31,32,.22);
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
 }
 .product-card-add:hover {
   transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(35,31,32,.28);
 }
 .product-card-add:active {
   transform: scale(.95);
@@ -118,11 +122,13 @@
   padding: 14px 18px;
   border-radius: 14px;
   text-decoration: none;
-  transition: background .2s, color .2s, transform .18s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 6px 16px rgba(35,31,32,.14);
+  transition: background .2s, color .2s, transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
 }
 .product-card-view:hover {
   background: #231F20;
   color: #F5ECDD;
+  box-shadow: 0 10px 22px rgba(35,31,32,.24);
 }
 .product-card-view:active {
   transform: scale(.96);

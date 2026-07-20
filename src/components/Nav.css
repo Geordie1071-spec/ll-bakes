@@ -29,6 +29,7 @@
 }
 .nav-compact {
   gap: 16px;
+  justify-content: flex-end;
 }
 .nav-full.nav-hidden {
   opacity: 0;
@@ -104,13 +105,11 @@
   transform: scaleX(1);
 }
 
-.nav-compact-pill {
+.nav-compact-actions {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #231F20;
-  border-radius: 16px;
-  padding: 8px;
+  margin-left: auto;
 }
 
 .ic-btn {
@@ -130,43 +129,19 @@
   transform: scale(1.12) rotate(-6deg);
 }
 
-.nav-get-sweets {
-  cursor: pointer;
-  font-family: 'Boogaloo', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #231F20;
-  background: #F5ECDD;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 22px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-get-sweets:hover {
-  background: #E83F6A !important;
-  color: #F5ECDD !important;
-  transform: translateY(-2px);
-}
-.nav-get-sweets:active {
-  transform: scale(.94);
-}
-
 .nav-icon-btn {
   cursor: pointer;
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  border: 1.5px solid rgba(245,236,221,.55);
+  border: 1.5px solid rgba(35,31,32,.35);
   background: transparent;
-  color: #F5ECDD;
+  color: #231F20;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-shadow: 0 4px 14px rgba(35,31,32,.12);
 }
 .nav-icon-btn:active {
   transform: scale(.88);
@@ -260,11 +235,5 @@
 @media (max-width: 640px) {
   .nav-sticky {
     padding: 16px 16px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-get-sweets {
-    display: none;
   }
 }

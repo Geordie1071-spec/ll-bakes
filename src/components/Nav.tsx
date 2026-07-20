@@ -17,7 +17,6 @@ const TABS: Tab[] = [
   { label: 'Custom Order', href: '/contact', key: 'custom' },
   { label: 'About', href: '/about', key: 'about' },
   { label: 'Contact', href: '/contact', key: 'contact' },
-  { label: 'FAQ', href: '/#faq', key: 'faq' },
 ];
 
 function activeKeyForPath(pathname: string): string {
@@ -91,14 +90,7 @@ export default function Nav({ showCookie = false }: NavProps) {
 
       {/* COMPACT NAV */}
       <nav className={`nav-compact${compact ? '' : ' nav-hidden'}`}>
-        <Link to="/" className="nav-logo-link">
-          <img src={logoImg} alt="Laura & Lara" style={{ height: 60, width: 'auto', display: 'block' }} />
-        </Link>
-        <div style={{ flex: 1 }} />
-        <div className="nav-compact-pill">
-          <button onClick={openCart} className="ic-btn nav-get-sweets" type="button">
-            <span>Get Sweets</span>
-          </button>
+        <div className="nav-compact-actions">
           <button onClick={openCart} aria-label="Cart" className="ic-btn nav-icon-btn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />

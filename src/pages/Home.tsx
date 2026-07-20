@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -20,25 +20,6 @@ const testimonials = [
   { headline: 'Love in every single bite.', quote: 'Every pastry tastes handmade because it is. You can feel the love in every single bite.', name: 'Hana K.' },
 ];
 const reviewsLoop = [...testimonials, ...testimonials];
-
-const faqs = [
-  { q: 'How far in advance should I order a custom cake?', a: 'For custom and celebration cakes we recommend at least 5–7 days’ notice so we can source the freshest ingredients and design something special. Wedding cakes, please reach out 4–6 weeks ahead.' },
-  { q: 'Do you offer gluten-free or vegan options?', a: 'Yes! We bake a rotating selection of gluten-free and vegan cakes, cookies and pastries every week. Just ask at the counter or note it on your custom order and we’ll take care of you.' },
-  { q: 'Can I place an order for pickup or delivery?', a: 'Both. Order online for same-day counter pickup, or choose local delivery at checkout for orders placed 24 hours in advance within the Rosewood District.' },
-  { q: 'Are your ingredients locally sourced?', a: 'Whenever possible. We use real butter, seasonal fruit from nearby farms, and never any artificial flavours or preservatives — everything is made from scratch each morning.' },
-  { q: 'Do you cater events and parties?', a: 'Absolutely. From birthday dessert tables to office spreads, tell us your headcount and vibe and we’ll build a catering menu that fits. Head to Custom Order to get started.' },
-];
-
-function Loader() {
-  const colors = ['#3a231d', '#E8823F', '#F5ECDD'];
-  return (
-    <div className="home-loader" aria-hidden="true">
-      {Array.from({ length: 9 }).map((_, i) => (
-        <div key={i} style={{ background: colors[i % 3], animationDelay: `${i * 0.09}s` }} />
-      ))}
-    </div>
-  );
-}
 
 function ReviewsCarousel() {
   const dragRef = useRef<HTMLDivElement>(null);
@@ -127,32 +108,9 @@ function ReviewsCarousel() {
   );
 }
 
-function Faq() {
-  const [open, setOpen] = useState<number | null>(null);
-  return (
-    <div className="faq-list">
-      {faqs.map((f, i) => {
-        const isOpen = open === i;
-        return (
-          <div key={i} className="faq-item">
-            <button className="faq-question" onClick={() => setOpen(isOpen ? null : i)} type="button">
-              <span>{f.q}</span>
-              <span className="faq-sign">{isOpen ? '−' : '+'}</span>
-            </button>
-            <div className="faq-answer" style={{ maxHeight: isOpen ? 500 : 0, opacity: isOpen ? 1 : 0 }}>
-              <p>{f.a}</p>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <div className="page-overflow-clip">
-      <Loader />
       <Nav />
 
       <section id="hero" className="home-hero">
@@ -193,16 +151,7 @@ export default function Home() {
         <ReviewsCarousel />
       </section>
 
-      <Wave bg="#E83F6A" fill="#F5ECDD" />
-
-      <section id="faq" className="home-faq">
-        <div className="home-faq-inner">
-          <SplitHeading as="h2" text="FAQ" className="home-faq-heading" />
-          <Faq />
-        </div>
-      </section>
-
-      <Wave bg="#F5ECDD" fill="#3a231d" />
+      <Wave bg="#E83F6A" fill="#3a231d" />
 
       <Footer />
     </div>

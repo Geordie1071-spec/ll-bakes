@@ -47,11 +47,6 @@ export default function CartDrawer() {
           ))}
         </div>
         <div className="cart-footer">
-          <div className="cart-deal">
-            <span className="cart-deal-star">&#9733;</span>
-            <span className="cart-deal-title">Sweet deal</span>
-            <span className="cart-deal-text">Grab a box of 6 and save a little dough</span>
-          </div>
           <div className="cart-row">
             <span className="cart-row-label">Shipping</span>
             <span className="cart-row-label">Calculated at checkout</span>
