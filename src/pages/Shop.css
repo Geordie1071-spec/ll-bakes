@@ -1,9 +1,17 @@
 .shop-header {
+  position: relative;
   max-width: 1180px;
   margin: 0 auto;
   padding: 70px 40px 10px;
   text-align: center;
+  overflow: hidden;
 }
+
+.shop-header-inner {
+  position: relative;
+  z-index: 2;
+}
+
 .shop-header h1 {
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
@@ -25,4 +33,10 @@
 
 .shop-grid-section {
   padding: 48px 0 100px;
+}
+
+@media (max-width: 640px) {
+  .shop-header {
+    padding: 70px 24px 10px;
+  }
 }
