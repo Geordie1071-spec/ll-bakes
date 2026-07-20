@@ -311,6 +311,42 @@
   .product-info-card {
     padding: 28px 28px 12px;
   }
+
+  .product-controls {
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .product-qty-stepper {
+    gap: 16px;
+    border-radius: 16px;
+    padding: 10px 18px;
+  }
+
+  .product-qty-stepper button {
+    width: 48px;
+    height: 48px;
+    font-size: 26px;
+  }
+
+  .product-qty-stepper span {
+    font-size: 22px;
+    min-width: 28px;
+  }
+
+  .product-add-btn {
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding: 18px 26px;
+    border-radius: 16px;
+    box-shadow: 5px 5px 0 #000;
+    gap: 16px;
+  }
+
+  .product-add-btn:hover,
+  .product-add-btn:active {
+    transform: translate(5px, 5px);
+  }
 }
 
 @media (max-width: 640px) {
