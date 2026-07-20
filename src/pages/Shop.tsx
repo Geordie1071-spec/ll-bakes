@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
-import { categoryColor, products } from '../lib/products';
+import { products } from '../lib/products';
 import './Shop.css';
 
 export default function Shop() {
@@ -21,9 +21,11 @@ export default function Shop() {
       </section>
 
       <section className="shop-grid-section">
-        <div className="shop-grid">
+        <div className="product-cards-grid">
           {products.map((p) => (
-            <ProductCard key={p.id} id={p.id} name={p.name} sub={p.sub} price={p.price} tag={p.tag || undefined} cardBg={categoryColor[p.cat]} placeholder={p.placeholder} />
+            <div key={p.id} className="product-cards-grid-item">
+              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} />
+            </div>
           ))}
         </div>
       </section>

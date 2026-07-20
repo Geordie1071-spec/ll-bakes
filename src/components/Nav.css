@@ -154,7 +154,7 @@
   transform: scale(1.12) rotate(-6deg);
 }
 
-.nav-get-sweets {
+.nav-shop-btn {
   cursor: pointer;
   font-family: 'Boogaloo', sans-serif;
   font-size: clamp(16px, 1.6vw, 20px);
@@ -170,13 +170,14 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  text-decoration: none;
 }
-.nav-get-sweets:hover {
+.nav-shop-btn:hover {
   background: #E83F6A !important;
   color: #F5ECDD !important;
   transform: translateY(-2px);
 }
-.nav-get-sweets:active {
+.nav-shop-btn:active {
   transform: scale(.94);
 }
 
@@ -301,7 +302,7 @@
 }
 
 @media (max-width: 480px) {
-  .nav-get-sweets {
+  .nav-shop-btn {
     display: none;
   }
 }

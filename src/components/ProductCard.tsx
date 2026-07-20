@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ImageSlot from './ImageSlot';
 import { useCart } from '../lib/CartContext';
+import { PRODUCT_CARD_COLOR } from '../lib/products';
 import './ProductCard.css';
 
 interface ProductCardProps {
@@ -8,12 +9,11 @@ interface ProductCardProps {
   name: string;
   sub: string;
   price: number;
-  tag?: string;
-  cardBg: string;
+  cardBg?: string;
   placeholder: string;
 }
 
-export default function ProductCard({ id, name, sub, price, tag, cardBg, placeholder }: ProductCardProps) {
+export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CARD_COLOR, placeholder }: ProductCardProps) {
   const { addToCart } = useCart();
   const href = `/product/${id}`;
 
@@ -21,17 +21,20 @@ export default function ProductCard({ id, name, sub, price, tag, cardBg, placeho
     <div className="product-card" style={{ background: cardBg }}>
       <div className="product-card-ring" />
       <div className="product-card-head">
-        <h3 className="product-card-title">{name}</h3>
+        <h3 className="product-card-title">
+          {name.split(' ').map((word, i) => (
+            <span key={i} className="product-card-title-line">{word}</span>
+          ))}
+        </h3>
         <p className="product-card-sub">{sub}</p>
       </div>
       <Link to={href} className="product-card-image">
         <ImageSlot shape="rect" placeholder={placeholder} />
-        {tag && <span className="product-card-tag">{tag}</span>}
       </Link>
       <div className="product-card-actions">
         <button className="product-card-add" onClick={() => addToCart({ id, name, sub, price })} type="button">
           <span>Add to Cart</span>
-          <span>${price}</span>
+          <span className="product-card-price">${price}</span>
         </button>
         <Link to={href} className="arrow-btn product-card-view">
           View Product{' '}

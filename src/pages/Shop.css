@@ -24,24 +24,5 @@
 }
 
 .shop-grid-section {
-  max-width: 1560px;
-  margin: 0 auto;
-  padding: 48px 24px 100px;
-}
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .shop-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 560px) {
-  .shop-grid {
-    grid-template-columns: 1fr;
-  }
+  padding: 48px 0 100px;
 }

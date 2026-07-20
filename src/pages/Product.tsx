@@ -4,7 +4,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ImageSlot from '../components/ImageSlot';
-import { categoryColor, getProduct, productBadges, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
+import { getProduct, productBadges, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
@@ -129,16 +129,18 @@ export default function Product() {
 
           <button onClick={onAdd} className="product-add-btn" type="button">
             <span>Add to Cart</span>
-            <span>${total}.00</span>
+            <span className="product-card-price">${total}.00</span>
           </button>
         </div>
       </section>
 
       <section className="product-related">
         <h2>You Might Also Love</h2>
-        <div className="product-related-grid">
+        <div className="product-cards-grid">
           {related.map((p) => (
-            <ProductCard key={p.id} id={p.id} name={p.name} sub={p.sub} price={p.price} tag={p.tag || undefined} cardBg={categoryColor[p.cat]} placeholder={p.placeholder} />
+            <div key={p.id} className="product-cards-grid-item">
+              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} />
+            </div>
           ))}
         </div>
       </section>

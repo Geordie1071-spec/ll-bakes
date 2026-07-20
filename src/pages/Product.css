@@ -337,12 +337,16 @@
   line-height: .95;
   margin: 0 0 34px;
   color: #231F20;
+  padding: 0 40px;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.product-related-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 28px;
-  align-items: start;
+
+@media (max-width: 640px) {
+  .product-related h2 {
+    padding: 0 24px;
+  }
 }
 
 @media (max-width: 860px) {

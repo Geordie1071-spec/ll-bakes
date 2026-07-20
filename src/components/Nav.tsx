@@ -95,9 +95,9 @@ export default function Nav({ showCookie = false }: NavProps) {
         </Link>
         <div style={{ flex: 1 }} />
         <div className="nav-compact-pill">
-          <button onClick={openCart} className="ic-btn nav-get-sweets" type="button">
-            <span>Get Sweets</span>
-          </button>
+          <Link to="/shop" className="ic-btn nav-shop-btn">
+            <span>Shop</span>
+          </Link>
           <button onClick={openCart} aria-label="Cart" className="ic-btn nav-icon-btn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
