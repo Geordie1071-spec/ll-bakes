@@ -26,7 +26,6 @@ export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CAR
             <span key={i} className="product-card-title-line">{word}</span>
           ))}
         </h3>
-        <p className="product-card-sub">{sub}</p>
       </div>
       <Link to={href} className="product-card-image">
         <ImageSlot shape="rect" placeholder={placeholder} />

@@ -4,10 +4,28 @@
   z-index: 9999;
   display: flex;
   pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.22s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.page-loader-fading {
+  opacity: 0;
 }
 
 .page-loader div {
   flex: 1;
   height: 100%;
-  animation: peelUp .8s cubic-bezier(.76, 0, .24, 1) forwards;
+  transform: translateY(0);
+  will-change: transform;
+  animation: peelUpSmooth 0.52s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation-delay: calc(var(--strip-i, 0) * 32ms);
+}
+
+@keyframes peelUpSmooth {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -100%, 0);
+  }
 }

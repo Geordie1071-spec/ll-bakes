@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import SplitHeading from '../components/SplitHeading';
+import BuildText from '../components/BuildText';
 import './Home.css';
 
 const favs = [
@@ -145,10 +146,18 @@ export default function Home() {
 
       <section id="hero" className="home-hero">
         <div className="home-hero-inner">
-          <h1>
-            The <span className="stroke-outline">sweet</span> indulgence that makes diets nervous.
-          </h1>
-          <Link className="shop-btn home-shop-btn" to="/shop">
+          <BuildText
+            as="h1"
+            className="home-hero-title"
+            startDelay={0.58}
+            letterDelay={0.02}
+            parts={[
+              { text: 'The ' },
+              { text: 'sweet', className: 'stroke-outline' },
+              { text: ' indulgence that makes diets nervous.' },
+            ]}
+          />
+          <Link className="shop-btn home-shop-btn home-shop-btn-reveal" to="/shop">
             Shop Now{' '}
             <span className="arr">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
