@@ -324,9 +324,9 @@
   }
 
   .product-add-btn {
-    flex: none;
+    flex: 1 1 auto;
     padding: 12px 14px;
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
