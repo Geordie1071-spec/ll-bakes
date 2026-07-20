@@ -2,9 +2,9 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  max-width: 1360px;
-  margin: 26px auto 0;
-  padding: 0 40px;
+  max-width: 1480px;
+  margin: 26px 40px 0 clamp(24px, 4vw, 72px);
+  padding: 0;
   font-family: 'Boogaloo', sans-serif;
   font-size: 20px;
   letter-spacing: 1px;
@@ -19,15 +19,15 @@
 }
 
 .product-detail {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 24px 40px 30px;
+  max-width: 1480px;
+  margin: 0 40px 0 clamp(24px, 4vw, 72px);
+  padding: 24px 0 30px;
   display: grid;
-  grid-template-columns: 1.45fr 0.85fr;
+  grid-template-columns: 1.05fr 1fr;
   grid-template-areas:
     "gallery title"
     "gallery info";
-  gap: 24px 56px;
+  gap: 24px 36px;
   align-items: start;
 }
 
@@ -292,24 +292,29 @@
 }
 
 @media (min-width: 861px) {
+  .product-info-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
   .product-info-card-title {
-    font-size: 26px;
-    letter-spacing: 2px;
+    font-size: 22px;
+    letter-spacing: 1.8px;
   }
 
   .product-taste-item {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.4;
-    gap: 12px;
+    gap: 10px;
   }
 
   .product-info-card p {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.5;
   }
 
   .product-info-card {
-    padding: 28px 28px 12px;
+    padding: 24px 22px 10px;
   }
 
   .product-controls {
@@ -368,7 +373,7 @@
 
 @media (max-width: 860px) {
   .product-back-btn {
-    padding: 0 24px;
+    margin: 26px 24px 0;
   }
 
   .product-detail {
@@ -378,11 +383,16 @@
       "gallery"
       "info";
     gap: 24px;
-    padding: 24px 24px 30px;
+    margin: 0 24px;
+    padding: 24px 0 30px;
   }
 
   .product-gallery {
     width: 100%;
     max-width: none;
+  }
+
+  .product-info-cards {
+    grid-template-columns: 1fr;
   }
 }
