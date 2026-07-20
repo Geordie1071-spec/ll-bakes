@@ -21,10 +21,11 @@
 }
 
 .footer-logo-img {
-  width: clamp(140px, 18vw, 220px);
+  width: clamp(110px, 14vw, 170px);
   height: auto;
   display: block;
   filter: drop-shadow(0 6px 16px rgba(0,0,0,.3));
+  margin-left: 12px;
 }
 
 .footer-links {
@@ -145,9 +146,14 @@
   left: 0;
   top: 50%;
   transform-origin: left center;
-  transform: translateY(-50%) scale(0) rotate(-25deg);
+  transform: translateY(-50%) translateX(10px) scale(0) rotate(-25deg);
   opacity: 0;
   transition: opacity .2s ease, transform .55s cubic-bezier(.34,1.85,.5,1);
+}
+.ge-logo svg {
+  width: 38px;
+  height: auto;
+  display: block;
 }
 .ge-credit:hover .ge-name {
   opacity: 0;
@@ -155,7 +161,19 @@
 }
 .ge-credit:hover .ge-logo {
   opacity: 1;
-  transform: translateY(-50%) scale(1) rotate(0);
+  transform: translateY(-50%) translateX(10px) scale(1) rotate(0);
+}
+
+@media (hover: none), (max-width: 768px) {
+  .ge-name {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .ge-logo {
+    opacity: .85;
+    transform: translateY(-50%) translateX(10px) scale(1) rotate(0);
+  }
 }
 
 @media (max-width: 900px) {
@@ -187,7 +205,8 @@
   }
 
   .footer-logo-img {
-    width: clamp(120px, 36vw, 180px);
+    width: clamp(96px, 28vw, 140px);
+    margin-left: 8px;
   }
 
   .ft-tab {

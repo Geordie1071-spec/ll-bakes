@@ -4,7 +4,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ImageSlot from '../components/ImageSlot';
-import { getProduct, productBadges, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
+import { getProduct, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
@@ -16,6 +16,7 @@ export default function Product() {
   const { addToCart } = useCart();
 
   const [shot, setShot] = useState(0);
+  const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
   const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
 
@@ -35,6 +36,16 @@ export default function Product() {
 
   const onAdd = () => addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty });
 
+  const goPrev = () => {
+    setSlideDir('prev');
+    setShot((s) => (s + shots.length - 1) % shots.length);
+  };
+
+  const goNext = () => {
+    setSlideDir('next');
+    setShot((s) => (s + 1) % shots.length);
+  };
+
   return (
     <div className="page-overflow-clip">
       <Nav />
@@ -48,34 +59,26 @@ export default function Product() {
       </div>
 
       <section className="product-detail">
+        <h1 className="product-title">{product.name}</h1>
+
         <div className="product-gallery">
           <div className="product-gallery-main">
-            <ImageSlot shape="rect" placeholder={`${product.placeholder} — ${shots[shot]}`} />
+            <div key={shot} className={`product-gallery-slide product-gallery-slide-${slideDir}`}>
+              <ImageSlot shape="rect" placeholder={`${product.placeholder} — ${shots[shot]}`} />
+            </div>
             <div className="product-gallery-nav">
-              <button onClick={() => setShot((s) => (s + shots.length - 1) % shots.length)} aria-label="Previous" type="button">
+              <button onClick={goPrev} aria-label="Previous" type="button">
                 &larr;
               </button>
-              <button onClick={() => setShot((s) => (s + 1) % shots.length)} aria-label="Next" type="button">
+              <button onClick={goNext} aria-label="Next" type="button">
                 &rarr;
               </button>
             </div>
             <span className="product-gallery-tag">{shots[shot]}</span>
           </div>
-          <div className="product-float product-float-1">
-            <ImageSlot shape="circle" placeholder="treat" />
-          </div>
-          <div className="product-float product-float-2">
-            <ImageSlot shape="circle" placeholder="berry" />
-          </div>
-          <div className="product-float product-float-3">
-            <ImageSlot shape="circle" placeholder="crumb" />
-          </div>
         </div>
 
         <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="product-tagline">Meet the treat that steals the party</p>
-
           <div className="product-info-cards">
             <div className="product-info-card">
               <div className="product-info-card-title">Taste Profile</div>
@@ -92,15 +95,6 @@ export default function Product() {
               <div className="product-info-card-title">Perfect For</div>
               <p>Birthdays, baby showers, anniversaries, celebrations, afternoon tea, or any Tuesday that deserves a little something sweet.</p>
             </div>
-          </div>
-
-          <div className="product-badges">
-            {productBadges.map((b) => (
-              <div key={b.label} className="product-badge">
-                <div className="product-badge-icon" dangerouslySetInnerHTML={{ __html: b.icon }} />
-                <div className="product-badge-label">{b.label}</div>
-              </div>
-            ))}
           </div>
 
           <div className="product-controls">
