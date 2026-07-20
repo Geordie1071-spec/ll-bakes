@@ -50,13 +50,10 @@ export default function Product() {
     <div className="page-overflow-clip">
       <Nav />
 
-      <div className="product-breadcrumb">
-        <Link to="/shop">Shop</Link>
-        <span className="crumb-sep">/</span>
-        <Link to="/shop">{product.cat}</Link>
-        <span className="crumb-sep">/</span>
-        <span className="crumb-current">{product.name}</span>
-      </div>
+      <Link to="/shop" className="product-back-btn">
+        <span aria-hidden="true">&larr;</span>
+        <span>Back to Shop</span>
+      </Link>
 
       <section className="product-detail">
         <h1 className="product-title">{product.name}</h1>

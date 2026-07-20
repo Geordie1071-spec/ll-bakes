@@ -28,22 +28,39 @@ export default function BuildText({
     return () => window.clearTimeout(timer);
   }, []);
 
-  const letters = useMemo(() => {
+  const content = useMemo(() => {
     let index = 0;
     const nodes: ReactNode[] = [];
 
     parts.forEach((part, partIdx) => {
-      [...part.text].forEach((ch) => {
-        const delay = startDelay + index * letterDelay;
-        index += 1;
+      const words = part.text.split(/(\s+)/);
+
+      words.forEach((segment, segIdx) => {
+        if (!segment) return;
+
+        if (/^\s+$/.test(segment)) {
+          nodes.push(<span key={`${partIdx}-space-${segIdx}`} className="build-space"> </span>);
+          return;
+        }
+
+        const letters = [...segment].map((ch) => {
+          const delay = startDelay + index * letterDelay;
+          index += 1;
+          return (
+            <span
+              key={`${partIdx}-${segIdx}-${index}`}
+              className="build-char"
+              style={{ transitionDelay: `${delay}s` }}
+              data-ready={ready}
+            >
+              {ch}
+            </span>
+          );
+        });
+
         nodes.push(
-          <span
-            key={`${partIdx}-${index}`}
-            className={`build-char${part.className ? ` ${part.className}` : ''}`}
-            style={{ transitionDelay: `${delay}s` }}
-            data-ready={ready}
-          >
-            {ch === ' ' ? '\u00a0' : ch}
+          <span key={`${partIdx}-word-${segIdx}`} className={`build-word${part.className ? ` ${part.className}` : ''}`}>
+            {letters}
           </span>,
         );
       });
@@ -54,7 +71,7 @@ export default function BuildText({
 
   return (
     <Tag className={className}>
-      {letters}
+      {content}
     </Tag>
   );
 }

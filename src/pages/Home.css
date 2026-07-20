@@ -61,14 +61,17 @@
   padding: 18px 48px;
   border-radius: 16px;
   text-decoration: none;
-  box-shadow: 0 10px 26px rgba(0,0,0,.22);
-  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 4px 4px 0 #000;
+  transition: transform .12s, box-shadow .12s, background .12s, color .12s;
 }
 .home-shop-btn:hover {
-  transform: translateY(-4px);
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
+  background: #E83F6A;
+  color: #F5ECDD;
 }
 .home-shop-btn:active {
-  transform: scale(.96);
+  transform: scale(.98);
 }
 
 .home-favourites {
@@ -270,7 +273,24 @@
 
 @media (max-width: 640px) {
   .home-hero {
-    padding: 120px 24px 50px;
+    padding: 120px 20px 50px;
+  }
+  .home-hero-inner {
+    max-width: 100%;
+  }
+  .home-hero h1,
+  .home-hero-title {
+    font-size: clamp(28px, 7.8vw, 44px);
+    line-height: 1.08;
+    letter-spacing: 0.5px;
+    -webkit-text-stroke: 1px currentColor;
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+  .home-shop-btn {
+    font-size: 18px;
+    padding: 16px 32px;
+    letter-spacing: 1px;
   }
   .home-reviews-heading {
     font-size: clamp(42px, 13vw, 72px);

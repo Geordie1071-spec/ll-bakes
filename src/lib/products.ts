@@ -10,7 +10,7 @@ export interface Product {
   placeholder: string;
 }
 
-export const PRODUCT_CARD_COLOR = '#F0568C';
+export const PRODUCT_CARD_COLOR = '#231F20';
 
 export const categoryColor: Record<Category, string> = {
   Cakes: '#F0568C',
