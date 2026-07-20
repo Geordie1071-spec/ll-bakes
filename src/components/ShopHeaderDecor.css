@@ -9,7 +9,7 @@
   position: absolute;
   pointer-events: auto;
   cursor: default;
-  opacity: 0.2;
+  opacity: 0.32;
   transform:
     translate3d(var(--hover-x, 0px), var(--hover-y, 0px), 0)
     rotate(var(--decor-rotate, 0deg));
@@ -50,7 +50,7 @@
 
 .shop-decor-item:hover,
 .shop-decor-item[data-hovered='true'] {
-  opacity: 0.3;
+  opacity: 0.44;
 }
 
 @keyframes shopDecorFloatA {
@@ -73,7 +73,7 @@
 
 @media (max-width: 640px) {
   .shop-decor-item {
-    opacity: 0.16;
+    opacity: 0.26;
   }
 
   .shop-decor-chocolate {

@@ -25,7 +25,7 @@
 .home-hero-cookie {
   position: absolute;
   height: auto;
-  opacity: 0.22;
+  opacity: 0.34;
   transform: rotate(var(--cookie-rotate, 0deg));
   filter: drop-shadow(0 10px 18px rgba(0,0,0,.08));
   will-change: transform;
@@ -334,7 +334,7 @@
     letter-spacing: 1px;
   }
   .home-hero-cookie {
-    opacity: 0.18;
+    opacity: 0.28;
   }
   .home-reviews-heading {
     font-size: clamp(42px, 13vw, 72px);
