@@ -8,6 +8,24 @@ import { getProduct, products, sizeLabels, sizeRatios, tasteNotesFor } from '../
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
+function ArrowLeftIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="M12 5l7 7-7 7" />
+    </svg>
+  );
+}
+
 export default function Product() {
   const { id } = useParams<{ id: string }>();
   const product = getProduct(id);
@@ -15,10 +33,12 @@ export default function Product() {
 
   const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
+  const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
+  const [galleryKey, setGalleryKey] = useState(0);
 
   const related = useMemo(() => {
     if (!product) return [];
-    return products.filter((p) => p.id !== product.id).slice(0, 4);
+    return products.filter((p) => p.id !== product.id).slice(0, 3);
   }, [product]);
 
   if (!product) return <Navigate to="/shop" replace />;
@@ -31,6 +51,16 @@ export default function Product() {
   const variantSub = isCake ? sizeLabels[sizeIdx] : product.sub;
 
   const onAdd = () => addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty });
+
+  const goPrev = () => {
+    setSlideDir('prev');
+    setGalleryKey((k) => k + 1);
+  };
+
+  const goNext = () => {
+    setSlideDir('next');
+    setGalleryKey((k) => k + 1);
+  };
 
   return (
     <div className="page-overflow-clip">
@@ -46,12 +76,20 @@ export default function Product() {
 
         <div className="product-gallery">
           <div className="product-gallery-main">
-            <div className="product-gallery-slide product-gallery-slide-next">
+            <div key={galleryKey} className={`product-gallery-slide product-gallery-slide-${slideDir}`}>
               {product.image ? (
                 <img src={product.image} alt={product.name} className="product-gallery-photo" />
               ) : (
                 <ImageSlot shape="rect" placeholder={product.placeholder} />
               )}
+            </div>
+            <div className="product-gallery-nav">
+              <button onClick={goPrev} aria-label="Previous image" type="button">
+                <ArrowLeftIcon />
+              </button>
+              <button onClick={goNext} aria-label="Next image" type="button">
+                <ArrowRightIcon />
+              </button>
             </div>
           </div>
         </div>

@@ -122,27 +122,23 @@
   border: none;
   background: #F5ECDD;
   color: #231F20;
-  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 18px rgba(0,0,0,.22);
-  transition: transform .18s;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform .18s, box-shadow .12s, background .18s, color .18s;
+}
+.product-gallery-nav button svg {
+  display: block;
 }
 .product-gallery-nav button:hover {
-  transform: scale(1.12);
+  transform: scale(1.08);
+  background: #E83F6A;
+  color: #F5ECDD;
 }
-.product-gallery-tag {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  z-index: 3;
-  font-family: ui-monospace, monospace;
-  font-size: 11px;
-  color: #7a1330;
-  background: rgba(245,236,221,.9);
-  padding: 5px 12px;
-  border-radius: 999px;
+.product-gallery-nav button:active {
+  transform: translate(3px, 3px) scale(1.02);
+  box-shadow: 1px 1px 0 #000;
 }
 
 .product-info {
@@ -288,25 +284,26 @@
   font-size: 19px;
   letter-spacing: .5px;
   text-transform: uppercase;
-  color: #231F20;
-  background: #E83F6A;
+  color: #F5ECDD;
+  background: #231F20;
   border: none;
   padding: 22px 30px;
   border-radius: 18px;
   box-shadow: 5px 5px 0 #000;
   transition: transform .12s, box-shadow .12s, background .12s, color .12s;
 }
-.product-add-btn:hover {
+.product-add-btn:hover,
+.product-add-btn:active {
   transform: translate(5px, 5px);
   box-shadow: 0 0 0 #000;
-  background: #000;
-  color: #fff;
+  background: #E83F6A;
+  color: #F5ECDD;
 }
 
 .product-related {
-  max-width: 1180px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 46px 40px 100px;
+  padding: 46px 0 100px;
 }
 .product-related h2 {
   font-family: 'Boogaloo', sans-serif;
@@ -317,9 +314,6 @@
   margin: 0 0 34px;
   color: #231F20;
   padding: 0 40px;
-  max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 @media (max-width: 640px) {
