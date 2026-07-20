@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -24,63 +24,85 @@ const values = [
 ];
 
 function ValuesCarousel() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (paused) return;
-    const timer = window.setInterval(() => {
-      setIndex((i) => (i + 1) % values.length);
-    }, 5200);
-    return () => window.clearInterval(timer);
-  }, [paused]);
+    const update = () => {
+      const section = sectionRef.current;
+      if (!section) return;
 
-  const go = (next: number) => {
-    setIndex((next + values.length) % values.length);
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+
+      const scrolled = Math.min(Math.max(-rect.top, 0), scrollable);
+      const p = scrolled / scrollable;
+      const nextIndex = Math.min(values.length - 1, Math.floor(p * values.length));
+
+      setProgress(p);
+      setIndex(nextIndex);
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  const scrollToSlide = (i: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const scrollable = section.offsetHeight - window.innerHeight;
+    const target = section.offsetTop + (scrollable * i) / Math.max(values.length - 1, 1);
+    window.scrollTo({ top: target, behavior: 'smooth' });
   };
 
   return (
     <section
-      className="about-carousel-section"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      ref={sectionRef}
+      className="about-carousel-scroll"
+      style={{ ['--slide-count' as string]: values.length }}
     >
-      <div className="about-carousel-track-line" aria-hidden="true" />
+      <div className="about-carousel-sticky">
+        <div className="about-carousel-track-line" aria-hidden="true" />
 
-      <div className="about-carousel-shell">
-        <button type="button" className="about-carousel-arrow about-carousel-arrow-prev" onClick={() => go(index - 1)} aria-label="Previous">
-          &larr;
-        </button>
-
-        <div className="about-carousel-viewport">
-          {values.map((v, i) => (
-            <article
-              key={v.n}
-              className={`about-carousel-slide${i === index ? ' about-carousel-slide-active' : ''}`}
-              aria-hidden={i !== index}
-            >
-              <div className="about-carousel-number">{v.n}</div>
-              <div className="about-carousel-pill">&bull; {v.label.toUpperCase()} &bull;</div>
-              <p>{v.desc}</p>
-            </article>
-          ))}
+        <div className="about-carousel-progress" aria-hidden="true">
+          <div className="about-carousel-progress-fill" style={{ transform: `scaleX(${progress})` }} />
         </div>
 
-        <button type="button" className="about-carousel-arrow about-carousel-arrow-next" onClick={() => go(index + 1)} aria-label="Next">
-          &rarr;
-        </button>
-      </div>
+        <div className="about-carousel-shell">
+          <div className="about-carousel-viewport">
+            {values.map((v, i) => (
+              <article
+                key={v.n}
+                className={`about-carousel-slide${i === index ? ' about-carousel-slide-active' : ''}${i < index ? ' about-carousel-slide-past' : ''}`}
+                aria-hidden={i !== index}
+              >
+                <div className="about-carousel-number">{v.n}</div>
+                <div className="about-carousel-pill">&bull; {v.label.toUpperCase()} &bull;</div>
+                <p>{v.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
 
-      <div className="about-carousel-dots">
-        {values.map((v, i) => (
-          <button
-            key={v.n}
-            type="button"
-            className={`about-carousel-dot${i === index ? ' about-carousel-dot-active' : ''}`}
-            onClick={() => setIndex(i)}
-            aria-label={`Show ${v.label}`}
-          />
-        ))}
+        <div className="about-carousel-dots">
+          {values.map((v, i) => (
+            <button
+              key={v.n}
+              type="button"
+              className={`about-carousel-dot${i === index ? ' about-carousel-dot-active' : ''}`}
+              onClick={() => scrollToSlide(i)}
+              aria-label={`Scroll to ${v.label}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

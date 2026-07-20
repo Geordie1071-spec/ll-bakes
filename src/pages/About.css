@@ -1,7 +1,7 @@
 .about-hero {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 70px 40px 20px;
+  padding: 80px 40px 24px;
   text-align: center;
 }
 
@@ -9,26 +9,37 @@
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  -webkit-text-stroke: 1.4px currentColor;
-  font-size: clamp(64px, 11vw, 150px);
-  line-height: .94;
+  -webkit-text-stroke: 2px currentColor;
+  font-size: clamp(72px, 14vw, 196px);
+  line-height: .9;
   margin: 0;
   color: #231F20;
 }
 
 .about-hero p {
   max-width: 620px;
-  margin: 28px auto 0;
+  margin: 32px auto 0;
   font-size: clamp(18px, 2.2vw, 22px);
   line-height: 1.6;
   color: #231F20;
   opacity: .82;
 }
 
-.about-carousel-section {
+.about-carousel-scroll {
   position: relative;
+  height: calc(var(--slide-count, 3) * 100vh);
   background: #231F20;
-  padding: 88px 24px 72px;
+}
+
+.about-carousel-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 88px 24px 48px;
   overflow: hidden;
 }
 
@@ -49,18 +60,33 @@
   pointer-events: none;
 }
 
+.about-carousel-progress {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 28px;
+  height: 2px;
+  background: rgba(245,236,221,.18);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.about-carousel-progress-fill {
+  height: 100%;
+  background: #F5ECDD;
+  transform-origin: left center;
+  border-radius: 999px;
+}
+
 .about-carousel-shell {
+  width: 100%;
   max-width: 920px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: clamp(12px, 3vw, 28px);
 }
 
 .about-carousel-viewport {
   position: relative;
-  min-height: clamp(320px, 42vw, 420px);
+  min-height: clamp(360px, 52vh, 520px);
   perspective: 1200px;
 }
 
@@ -74,12 +100,16 @@
   text-align: center;
   padding: 0 12px;
   opacity: 0;
-  transform: translateX(48px) rotateY(-14deg) scale(.94);
+  transform: translateX(56px) rotateY(-16deg) scale(.92);
   transform-origin: center center;
   transition:
-    opacity .55s cubic-bezier(0.33, 1, 0.68, 1),
-    transform .7s cubic-bezier(0.33, 1, 0.68, 1);
+    opacity .65s cubic-bezier(0.33, 1, 0.68, 1),
+    transform .75s cubic-bezier(0.33, 1, 0.68, 1);
   pointer-events: none;
+}
+
+.about-carousel-slide-past {
+  transform: translateX(-56px) rotateY(16deg) scale(.92);
 }
 
 .about-carousel-slide-active {
@@ -91,7 +121,7 @@
 .about-carousel-number {
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
-  font-size: clamp(120px, 24vw, 280px);
+  font-size: clamp(140px, 28vw, 320px);
   line-height: .82;
   color: transparent;
   -webkit-text-stroke: 2px #F5ECDD;
@@ -119,32 +149,11 @@
   opacity: .88;
 }
 
-.about-carousel-arrow {
-  cursor: pointer;
-  width: clamp(46px, 8vw, 56px);
-  height: clamp(46px, 8vw, 56px);
-  border-radius: 50%;
-  border: 1.5px solid rgba(245,236,221,.45);
-  background: transparent;
-  color: #F5ECDD;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background .2s, transform .18s ease;
-  flex-shrink: 0;
-}
-
-.about-carousel-arrow:hover {
-  background: rgba(245,236,221,.12);
-  transform: scale(1.06);
-}
-
 .about-carousel-dots {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 .about-carousel-dot {
@@ -222,24 +231,24 @@
 
 @media (max-width: 640px) {
   .about-hero {
-    padding: 70px 24px 20px;
+    padding: 72px 24px 20px;
   }
 
-  .about-carousel-section {
-    padding: 72px 16px 56px;
+  .about-hero h1 {
+    font-size: clamp(58px, 16vw, 96px);
+    -webkit-text-stroke: 1.4px currentColor;
   }
 
-  .about-carousel-shell {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .about-carousel-arrow {
-    display: none;
+  .about-carousel-sticky {
+    padding: 72px 16px 40px;
   }
 
   .about-carousel-viewport {
-    min-height: 360px;
+    min-height: 380px;
+  }
+
+  .about-carousel-number {
+    font-size: clamp(112px, 30vw, 200px);
   }
 
   .about-shop-cta {
