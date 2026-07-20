@@ -249,6 +249,18 @@
 
   .about-carousel-number {
     font-size: clamp(112px, 30vw, 200px);
+    -webkit-text-stroke: 2.5px #F5ECDD;
+  }
+
+  .about-carousel-pill {
+    font-size: clamp(18px, 4.5vw, 24px);
+    padding: 12px 22px;
+  }
+
+  .about-carousel-slide p {
+    font-size: clamp(20px, 5vw, 26px);
+    max-width: 100%;
+    padding: 0 8px;
   }
 
   .about-shop-cta {
