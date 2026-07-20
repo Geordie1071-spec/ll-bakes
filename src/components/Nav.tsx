@@ -13,7 +13,6 @@ interface Tab {
 
 const TABS: Tab[] = [
   { label: 'Shop', href: '/shop', key: 'shop' },
-  { label: 'Custom Order', href: '/contact', key: 'custom' },
   { label: 'About', href: '/about', key: 'about' },
   { label: 'Contact', href: '/contact', key: 'contact' },
 ];

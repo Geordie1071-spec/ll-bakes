@@ -5,7 +5,6 @@ import './Footer.css';
 
 const links = [
   { label: 'Shop', href: '/shop' },
-  { label: 'Custom Order', href: '/contact' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

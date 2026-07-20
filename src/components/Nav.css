@@ -263,22 +263,30 @@
   position: relative;
   text-decoration: none;
   display: block;
-  line-height: .92;
+  line-height: .9;
   font-family: 'Boogaloo', sans-serif;
-  font-size: clamp(48px,10vw,120px);
+  font-size: clamp(58px, 13vw, 136px);
   letter-spacing: 1px;
   text-transform: uppercase;
-  padding: min(1.4vh,14px) 0;
+  padding: min(1.8vh, 18px) 0;
   border-bottom: 1.5px solid rgba(35,31,32,.18);
 }
 .mm-link .mm-ltr {
   display: inline-block;
   color: #231F20;
   transition: color .3s ease;
+  -webkit-text-stroke: 0.8px currentColor;
 }
 .mm-link:hover .mm-ltr {
   color: transparent;
-  -webkit-text-stroke: 1.4px #231F20;
+  -webkit-text-stroke: 1.6px #231F20;
+}
+
+@media (max-width: 640px) {
+  .mm-link {
+    font-size: clamp(72px, 18vw, 128px);
+    padding: min(2.2vh, 22px) 0;
+  }
 }
 
 .nav-social {
