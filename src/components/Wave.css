@@ -1,0 +1,16 @@
+.page-wave {
+  position: relative;
+  height: 110px;
+  overflow: hidden;
+  line-height: 0;
+  margin-top: -1px;
+}
+
+.page-wave-svg {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveDrift var(--wave-dur, 18s) linear infinite;
+}

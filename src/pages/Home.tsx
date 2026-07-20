@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import SplitHeading from '../components/SplitHeading';
 import BuildText from '../components/BuildText';
+import Wave from '../components/Wave';
 import cookieImg from '../assets/cookie.png';
 import { getProduct } from '../lib/products';
 import './Home.css';
@@ -71,8 +72,10 @@ function ReviewsCarousel() {
     let moved = false;
     let startX = 0;
     let scroll = 0;
-    let hover = false;
+    let leftover = 0;
     const half = () => dz.scrollWidth / 2;
+    // ~0.28px/frame ≈ half the original 0.5 speed, with subpixel accumulation
+    const speed = 0.28;
 
     const onDown = (e: PointerEvent) => {
       down = true;
@@ -99,18 +102,19 @@ function ReviewsCarousel() {
     dz.addEventListener('pointermove', onMove);
     dz.addEventListener('pointerup', onUp);
     dz.addEventListener('pointercancel', onUp);
-    dz.addEventListener('pointerenter', () => (hover = true));
-    dz.addEventListener('pointerleave', () => {
-      hover = false;
-      onUp();
-    });
+    dz.addEventListener('lostpointercapture', onUp);
     dz.addEventListener('click', onClickCapture, true);
 
     let raf = 0;
     const step = () => {
-      if (!down && !hover) {
-        dz.scrollLeft += 0.5;
-        if (dz.scrollLeft >= half()) dz.scrollLeft -= half();
+      if (!down) {
+        leftover += speed;
+        const stepPx = Math.floor(leftover);
+        if (stepPx > 0) {
+          leftover -= stepPx;
+          dz.scrollLeft += stepPx;
+          if (dz.scrollLeft >= half()) dz.scrollLeft -= half();
+        }
       }
       raf = requestAnimationFrame(step);
     };
@@ -122,6 +126,7 @@ function ReviewsCarousel() {
       dz.removeEventListener('pointermove', onMove);
       dz.removeEventListener('pointerup', onUp);
       dz.removeEventListener('pointercancel', onUp);
+      dz.removeEventListener('lostpointercapture', onUp);
       dz.removeEventListener('click', onClickCapture, true);
     };
   }, []);
@@ -231,22 +236,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Wave bg="#F5ECDD" fill="#3a231d" />
-
       <Footer />
-    </div>
-  );
-}
-
-function Wave({ bg, fill }: { bg: string; fill: string }) {
-  return (
-    <div className="home-wave" style={{ background: bg }}>
-      <svg viewBox="0 0 2880 120" preserveAspectRatio="none" className="home-wave-svg">
-        <path
-          fill={fill}
-          d="M0,60 C160,100 320,20 480,60 C640,100 800,20 960,60 C1120,100 1280,20 1440,60 C1600,100 1760,20 1920,60 C2080,100 2240,20 2400,60 C2560,100 2720,20 2880,60 L2880,120 L0,120 Z"
-        />
-      </svg>
     </div>
   );
 }
