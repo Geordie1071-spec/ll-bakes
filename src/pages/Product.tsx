@@ -34,6 +34,7 @@ export default function Product() {
   const [qty, setQty] = useState(1);
   const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
   const [galleryKey, setGalleryKey] = useState(0);
+  const [openInfo, setOpenInfo] = useState<'taste' | 'perfect' | null>('taste');
 
   const related = useMemo(() => {
     if (!product) return [];
@@ -91,21 +92,48 @@ export default function Product() {
         </div>
 
         <div className="product-info">
-          <div className="product-info-cards">
-            <div className="product-info-card">
-              <div className="product-info-card-title">Taste Profile</div>
-              <div className="product-taste-list">
-                {tasteNotes.map((t) => (
-                  <div key={t} className="product-taste-item">
-                    <span>&bull;</span>
-                    <span>{t}</span>
-                  </div>
-                ))}
+          <div className="product-info-accordion">
+            <div className="product-info-item">
+              <button
+                className="product-info-question"
+                type="button"
+                aria-expanded={openInfo === 'taste'}
+                onClick={() => setOpenInfo(openInfo === 'taste' ? null : 'taste')}
+              >
+                <span>Taste Profile</span>
+                <span className="product-info-sign">{openInfo === 'taste' ? '−' : '+'}</span>
+              </button>
+              <div
+                className="product-info-answer"
+                style={{ maxHeight: openInfo === 'taste' ? 420 : 0, opacity: openInfo === 'taste' ? 1 : 0 }}
+              >
+                <div className="product-taste-list">
+                  {tasteNotes.map((t) => (
+                    <div key={t} className="product-taste-item">
+                      <span>&bull;</span>
+                      <span>{t}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="product-info-card">
-              <div className="product-info-card-title">Perfect For</div>
-              <p>Birthdays, baby showers, anniversaries, celebrations, afternoon tea, or any Tuesday that deserves a little something sweet.</p>
+
+            <div className="product-info-item">
+              <button
+                className="product-info-question"
+                type="button"
+                aria-expanded={openInfo === 'perfect'}
+                onClick={() => setOpenInfo(openInfo === 'perfect' ? null : 'perfect')}
+              >
+                <span>Perfect For</span>
+                <span className="product-info-sign">{openInfo === 'perfect' ? '−' : '+'}</span>
+              </button>
+              <div
+                className="product-info-answer"
+                style={{ maxHeight: openInfo === 'perfect' ? 280 : 0, opacity: openInfo === 'perfect' ? 1 : 0 }}
+              >
+                <p>Birthdays, baby showers, anniversaries, celebrations, afternoon tea, or any Tuesday that deserves a little something sweet.</p>
+              </div>
             </div>
           </div>
 
