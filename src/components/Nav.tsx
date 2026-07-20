@@ -71,10 +71,10 @@ export default function Nav({ showCookie = false }: NavProps) {
           />
         )}
         <Link to="/" className="nav-logo-link">
-          <img src={logoImg} alt="Laura & Lara" style={{ height: 100, width: 'auto', display: 'block' }} />
+          <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-full" />
         </Link>
         <div style={{ flex: 1 }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+        <div className="nav-tabs">
           {TABS.map((t) => (
             <Link key={t.key} className="ll-tab" to={t.href} data-on={active === t.key}>
               <span className="ll-tab-text"><Letters text={t.label} className="ltr" /></span>
@@ -90,7 +90,14 @@ export default function Nav({ showCookie = false }: NavProps) {
 
       {/* COMPACT NAV */}
       <nav className={`nav-compact${compact ? '' : ' nav-hidden'}`}>
-        <div className="nav-compact-actions">
+        <Link to="/" className="nav-logo-link">
+          <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-compact" />
+        </Link>
+        <div style={{ flex: 1 }} />
+        <div className="nav-compact-pill">
+          <button onClick={openCart} className="ic-btn nav-get-sweets" type="button">
+            <span>Get Sweets</span>
+          </button>
           <button onClick={openCart} aria-label="Cart" className="ic-btn nav-icon-btn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
