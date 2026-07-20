@@ -98,15 +98,15 @@ export default function Product() {
               <button
                 className="product-info-question"
                 type="button"
-                aria-expanded={openInfo === 'taste'}
-                onClick={() => setOpenInfo(openInfo === 'taste' ? null : 'taste')}
+                aria-expanded={tasteOpen}
+                onClick={() => setTasteOpen((open) => !open)}
               >
                 <span>Taste Profile</span>
-                <span className="product-info-sign">{openInfo === 'taste' ? '−' : '+'}</span>
+                <span className="product-info-sign">{tasteOpen ? '−' : '+'}</span>
               </button>
               <div
                 className="product-info-answer"
-                style={{ maxHeight: openInfo === 'taste' ? 420 : 0, opacity: openInfo === 'taste' ? 1 : 0 }}
+                style={{ maxHeight: tasteOpen ? 420 : 0, opacity: tasteOpen ? 1 : 0 }}
               >
                 <div className="product-taste-list">
                   {tasteNotes.map((t) => (
@@ -123,15 +123,15 @@ export default function Product() {
               <button
                 className="product-info-question"
                 type="button"
-                aria-expanded={openInfo === 'perfect'}
-                onClick={() => setOpenInfo(openInfo === 'perfect' ? null : 'perfect')}
+                aria-expanded={perfectOpen}
+                onClick={() => setPerfectOpen((open) => !open)}
               >
                 <span>Perfect For</span>
-                <span className="product-info-sign">{openInfo === 'perfect' ? '−' : '+'}</span>
+                <span className="product-info-sign">{perfectOpen ? '−' : '+'}</span>
               </button>
               <div
                 className="product-info-answer"
-                style={{ maxHeight: openInfo === 'perfect' ? 280 : 0, opacity: openInfo === 'perfect' ? 1 : 0 }}
+                style={{ maxHeight: perfectOpen ? 280 : 0, opacity: perfectOpen ? 1 : 0 }}
               >
                 <p>Birthdays, baby showers, anniversaries, celebrations, afternoon tea, or any Tuesday that deserves a little something sweet.</p>
               </div>
