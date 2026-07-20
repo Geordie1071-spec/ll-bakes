@@ -1,5 +1,12 @@
 import { useCart } from '../lib/CartContext';
+import { getProduct } from '../lib/products';
 import './CartDrawer.css';
+
+function resolveCartImage(id: string, image?: string) {
+  if (image) return image;
+  const baseId = id.replace(/-\d+$/, '');
+  return getProduct(baseId)?.image ?? getProduct(id)?.image;
+}
 
 export default function CartDrawer() {
   const { items, isOpen, total, closeCart, increment, decrement, remove } = useCart();
@@ -21,12 +28,12 @@ export default function CartDrawer() {
               <p>Add something sweet to get started.</p>
             </div>
           )}
-          {items.map((it) => (
+          {items.map((it) => {
+            const thumb = resolveCartImage(it.id, it.image);
+            return (
             <div key={it.id} className="cart-line">
               <div className="cart-line-thumb">
-                {it.image ? (
-                  <img src={it.image} alt="" className="cart-line-thumb-img" />
-                ) : null}
+                {thumb ? <img src={thumb} alt="" className="cart-line-thumb-img" /> : null}
               </div>
               <div className="cart-line-body">
                 <h3>{it.name}</h3>
@@ -48,7 +55,8 @@ export default function CartDrawer() {
                 &times;
               </button>
             </div>
-          ))}
+            );
+          })}
         </div>
         <div className="cart-footer">
           <div className="cart-row">
