@@ -50,7 +50,8 @@ export default function Product() {
   const variantId = isCake ? `${product.id}-${sizeIdx}` : product.id;
   const variantSub = isCake ? sizeLabels[sizeIdx] : product.sub;
 
-  const onAdd = () => addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty });
+  const onAdd = () =>
+    addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty, image: product.image });
 
   const goPrev = () => {
     setSlideDir('prev');

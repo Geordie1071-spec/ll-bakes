@@ -6,6 +6,7 @@ export interface CartLine {
   sub: string;
   price: number;
   qty: number;
+  image?: string;
 }
 
 export interface CartItemInput {
@@ -14,6 +15,7 @@ export interface CartItemInput {
   sub?: string;
   price: number;
   qty?: number;
+  image?: string;
 }
 
 interface CartContextValue {
@@ -41,10 +43,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const idx = prev.findIndex((x) => x.id === item.id);
       if (idx >= 0) {
         const next = prev.slice();
-        next[idx] = { ...next[idx], qty: next[idx].qty + addQty };
+        next[idx] = {
+          ...next[idx],
+          qty: next[idx].qty + addQty,
+          image: next[idx].image || item.image,
+        };
         return next;
       }
-      return [...prev, { id: item.id, name: item.name, sub: item.sub ?? 'Freshly baked', price: item.price, qty: addQty }];
+      return [
+        ...prev,
+        {
+          id: item.id,
+          name: item.name,
+          sub: item.sub ?? 'Freshly baked',
+          price: item.price,
+          qty: addQty,
+          image: item.image,
+        },
+      ];
     });
     setIsOpen(true);
   };

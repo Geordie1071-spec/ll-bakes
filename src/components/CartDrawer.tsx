@@ -23,7 +23,11 @@ export default function CartDrawer() {
           )}
           {items.map((it) => (
             <div key={it.id} className="cart-line">
-              <div className="cart-line-thumb" />
+              <div className="cart-line-thumb">
+                {it.image ? (
+                  <img src={it.image} alt="" className="cart-line-thumb-img" />
+                ) : null}
+              </div>
               <div className="cart-line-body">
                 <h3>{it.name}</h3>
                 <p>{it.sub}</p>

@@ -36,7 +36,7 @@ export default function ProductCard({ id, name, sub, price, cardBg = PRODUCT_CAR
         )}
       </Link>
       <div className="product-card-actions">
-        <button className="product-card-add" onClick={() => addToCart({ id, name, sub, price })} type="button">
+        <button className="product-card-add" onClick={() => addToCart({ id, name, sub, price, image })} type="button">
           <span>Add to Cart</span>
           <span className="product-card-price">${price}</span>
         </button>
