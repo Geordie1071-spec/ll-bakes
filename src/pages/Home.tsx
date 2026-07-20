@@ -5,7 +5,40 @@ import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import SplitHeading from '../components/SplitHeading';
 import BuildText from '../components/BuildText';
+import cookieImg from '../assets/cookie.png';
 import './Home.css';
+
+const heroCookies = [
+  { className: 'home-hero-cookie-1', width: 'clamp(88px, 11vw, 150px)', top: '10%', left: '5%', rotate: -18 },
+  { className: 'home-hero-cookie-2', width: 'clamp(72px, 9vw, 120px)', top: '18%', right: '6%', rotate: 14 },
+  { className: 'home-hero-cookie-3', width: 'clamp(96px, 12vw, 160px)', bottom: '16%', left: '8%', rotate: 8 },
+  { className: 'home-hero-cookie-4', width: 'clamp(64px, 8vw, 110px)', bottom: '22%', right: '10%', rotate: -22 },
+  { className: 'home-hero-cookie-5', width: 'clamp(56px, 7vw, 92px)', top: '42%', left: '14%', rotate: 12 },
+  { className: 'home-hero-cookie-6', width: 'clamp(60px, 7vw, 98px)', top: '38%', right: '14%', rotate: -10 },
+];
+
+function HeroCookies() {
+  return (
+    <div className="home-hero-cookies" aria-hidden="true">
+      {heroCookies.map((cookie) => (
+        <img
+          key={cookie.className}
+          className={`home-hero-cookie ${cookie.className}`}
+          src={cookieImg}
+          alt=""
+          style={{
+            width: cookie.width,
+            top: cookie.top,
+            left: cookie.left,
+            right: cookie.right,
+            bottom: cookie.bottom,
+            ['--cookie-rotate' as string]: `${cookie.rotate}deg`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 const favs = [
   { id: 'strawberry', name: 'Strawberry Dream Cake', sub: 'Serves 8 · 3 layers', price: 48, placeholder: 'Drop cake photo' },
@@ -145,6 +178,7 @@ export default function Home() {
       <Nav />
 
       <section id="hero" className="home-hero">
+        <HeroCookies />
         <div className="home-hero-inner">
           <BuildText
             as="h1"

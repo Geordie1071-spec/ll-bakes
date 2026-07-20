@@ -70,13 +70,6 @@
   min-width: 0;
 }
 
-.nav-cookie {
-  transition: transform .5s cubic-bezier(.34,1.56,.64,1);
-}
-.nav-cookie:hover {
-  transform: translateX(-50%) translateY(12px) rotate(6deg);
-}
-
 .ll-tab {
   position: relative;
   text-decoration: none;

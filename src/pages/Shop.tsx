@@ -7,7 +7,7 @@ import './Shop.css';
 export default function Shop() {
   return (
     <div className="page-overflow-clip">
-      <Nav showCookie />
+      <Nav />
 
       <section className="shop-header">
         <h1>

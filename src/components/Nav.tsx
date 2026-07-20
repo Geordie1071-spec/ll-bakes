@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Letters from './Letters';
 import { useCart } from '../lib/CartContext';
-import cookieImg from '../assets/cookie.png';
 import logoImg from '../assets/logo.png';
 import './Nav.css';
 
@@ -26,11 +25,7 @@ function activeKeyForPath(pathname: string): string {
   return '';
 }
 
-interface NavProps {
-  showCookie?: boolean;
-}
-
-export default function Nav({ showCookie = false }: NavProps) {
+export default function Nav() {
   const { pathname } = useLocation();
   const { count, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
@@ -62,14 +57,6 @@ export default function Nav({ showCookie = false }: NavProps) {
     <div className="nav-root">
       {/* FULL NAV */}
       <nav className={`nav-full${compact ? ' nav-hidden' : ''}`}>
-        {showCookie && (
-          <img
-            className="nav-cookie"
-            src={cookieImg}
-            alt=""
-            style={{ position: 'absolute', left: '22%', top: -74, transform: 'translateX(-50%) rotate(-4deg)', width: 150, height: 'auto', pointerEvents: 'auto', filter: 'drop-shadow(0 10px 18px rgba(0,0,0,.28))', zIndex: 1, cursor: 'pointer' }}
-          />
-        )}
         <Link to="/" className="nav-logo-link">
           <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-full" />
         </Link>
