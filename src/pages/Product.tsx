@@ -34,7 +34,8 @@ export default function Product() {
   const [qty, setQty] = useState(1);
   const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
   const [galleryKey, setGalleryKey] = useState(0);
-  const [openInfo, setOpenInfo] = useState<'taste' | 'perfect' | null>('taste');
+  const [tasteOpen, setTasteOpen] = useState(false);
+  const [perfectOpen, setPerfectOpen] = useState(false);
 
   const related = useMemo(() => {
     if (!product) return [];
