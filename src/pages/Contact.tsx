@@ -23,7 +23,7 @@ export default function Contact() {
 
       <section className="contact-header">
         <h1>Contact</h1>
-        <p>128 Sugar Lane, Rosewood District</p>
+        <p>56, San Gwann Bosco street, Victoria Gozo</p>
         <a href="mailto:hello@lauraandlara.com" className="contact-email">
           hello@lauraandlara.com
         </a>

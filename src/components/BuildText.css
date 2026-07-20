@@ -1,0 +1,33 @@
+.build-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.build-space {
+  display: inline;
+}
+
+.build-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em) rotate(3deg);
+  transition:
+    opacity 0.38s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.48s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.build-char[data-ready='true'] {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.build-word.stroke-outline .build-char {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+}
+
+@media (max-width: 640px) {
+  .build-word.stroke-outline .build-char {
+    -webkit-text-stroke: 1px var(--ink);
+  }
+}

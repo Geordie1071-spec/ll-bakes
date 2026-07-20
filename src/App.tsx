@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { CartProvider } from './lib/CartContext';
 import { useLenis } from './lib/useLenis';
 import CartDrawer from './components/CartDrawer';
+import PageLoader from './components/PageLoader';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
@@ -21,6 +22,7 @@ function AppShell() {
   useLenis();
   return (
     <>
+      <PageLoader />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

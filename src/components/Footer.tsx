@@ -5,9 +5,7 @@ import './Footer.css';
 
 const links = [
   { label: 'Shop', href: '/shop' },
-  { label: 'Custom Order', href: '/contact' },
   { label: 'About', href: '/about' },
-  { label: 'FAQ', href: '/#faq' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -32,7 +30,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-logo">
-          <img src={logoImg} alt="Laura &amp; Lara" style={{ width: 300, height: 'auto', display: 'block', filter: 'drop-shadow(0 6px 16px rgba(0,0,0,.3))' }} />
+          <img src={logoImg} alt="Laura &amp; Lara" className="footer-logo-img" />
         </div>
 
         <div className="footer-links">

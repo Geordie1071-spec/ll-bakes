@@ -4,12 +4,52 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import SplitHeading from '../components/SplitHeading';
+import BuildText from '../components/BuildText';
+import cookieImg from '../assets/cookie.png';
+import { getProduct } from '../lib/products';
 import './Home.css';
 
-const favs = [
-  { id: 'strawberry', name: 'Strawberry Dream Cake', sub: 'Best seller', price: 48, cardBg: '#F0568C', placeholder: 'Drop cake photo' },
-  { id: 'brown-butter-cookies', name: 'Brown Butter Cookies', sub: 'Box of six', price: 18, cardBg: '#E8823F', placeholder: 'Drop cookie photo' },
-  { id: 'almond-croissant', name: 'Almond Croissant', sub: 'Baked at dawn', price: 6, cardBg: '#F4B740', placeholder: 'Drop pastry photo' },
+const heroCookies = [
+  { className: 'home-hero-cookie-1', width: 'clamp(120px, 16vw, 220px)', top: '8%', left: '3%', rotate: -18 },
+  { className: 'home-hero-cookie-2', width: 'clamp(104px, 13vw, 180px)', top: '14%', right: '4%', rotate: 14 },
+  { className: 'home-hero-cookie-3', width: 'clamp(128px, 17vw, 230px)', bottom: '12%', left: '5%', rotate: 8 },
+  { className: 'home-hero-cookie-4', width: 'clamp(96px, 12vw, 165px)', bottom: '18%', right: '6%', rotate: -22 },
+  { className: 'home-hero-cookie-5', width: 'clamp(88px, 11vw, 150px)', top: '40%', left: '10%', rotate: 12 },
+  { className: 'home-hero-cookie-6', width: 'clamp(92px, 11vw, 155px)', top: '36%', right: '10%', rotate: -10 },
+];
+
+function HeroCookies() {
+  return (
+    <div className="home-hero-cookies" aria-hidden="true">
+      {heroCookies.map((cookie) => (
+        <img
+          key={cookie.className}
+          className={`home-hero-cookie ${cookie.className}`}
+          src={cookieImg}
+          alt=""
+          style={{
+            width: cookie.width,
+            top: cookie.top,
+            left: cookie.left,
+            right: cookie.right,
+            bottom: cookie.bottom,
+            ['--cookie-rotate' as string]: `${cookie.rotate}deg`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+const favIds = ['strawberry', 'choc-chip', 'croissant'] as const;
+const favs = favIds.map((id) => getProduct(id)!);
+
+const faqs = [
+  { q: 'How far in advance should I order a custom cake?', a: 'For custom and celebration cakes we recommend at least 5–7 days’ notice so we can source the freshest ingredients and design something special. Wedding cakes, please reach out 4–6 weeks ahead.' },
+  { q: 'Do you offer gluten-free or vegan options?', a: 'Yes! We bake a rotating selection of gluten-free and vegan cakes, cookies and pastries every week. Just ask at the counter or note it on your custom order and we’ll take care of you.' },
+  { q: 'Can I place an order for pickup or delivery?', a: 'Both. Order online for same-day counter pickup, or choose local delivery at checkout for orders placed 24 hours in advance within the Rosewood District.' },
+  { q: 'Are your ingredients locally sourced?', a: 'Whenever possible. We use real butter, seasonal fruit from nearby farms, and never any artificial flavours or preservatives — everything is made from scratch each morning.' },
+  { q: 'Do you cater events and parties?', a: 'Absolutely. From birthday dessert tables to office spreads, tell us your headcount and vibe and we’ll build a catering menu that fits. Head to Custom Order to get started.' },
 ];
 
 const testimonials = [
@@ -20,25 +60,6 @@ const testimonials = [
   { headline: 'Love in every single bite.', quote: 'Every pastry tastes handmade because it is. You can feel the love in every single bite.', name: 'Hana K.' },
 ];
 const reviewsLoop = [...testimonials, ...testimonials];
-
-const faqs = [
-  { q: 'How far in advance should I order a custom cake?', a: 'For custom and celebration cakes we recommend at least 5–7 days’ notice so we can source the freshest ingredients and design something special. Wedding cakes, please reach out 4–6 weeks ahead.' },
-  { q: 'Do you offer gluten-free or vegan options?', a: 'Yes! We bake a rotating selection of gluten-free and vegan cakes, cookies and pastries every week. Just ask at the counter or note it on your custom order and we’ll take care of you.' },
-  { q: 'Can I place an order for pickup or delivery?', a: 'Both. Order online for same-day counter pickup, or choose local delivery at checkout for orders placed 24 hours in advance within the Rosewood District.' },
-  { q: 'Are your ingredients locally sourced?', a: 'Whenever possible. We use real butter, seasonal fruit from nearby farms, and never any artificial flavours or preservatives — everything is made from scratch each morning.' },
-  { q: 'Do you cater events and parties?', a: 'Absolutely. From birthday dessert tables to office spreads, tell us your headcount and vibe and we’ll build a catering menu that fits. Head to Custom Order to get started.' },
-];
-
-function Loader() {
-  const colors = ['#3a231d', '#E8823F', '#F5ECDD'];
-  return (
-    <div className="home-loader" aria-hidden="true">
-      {Array.from({ length: 9 }).map((_, i) => (
-        <div key={i} style={{ background: colors[i % 3], animationDelay: `${i * 0.09}s` }} />
-      ))}
-    </div>
-  );
-}
 
 function ReviewsCarousel() {
   const dragRef = useRef<HTMLDivElement>(null);
@@ -152,15 +173,23 @@ function Faq() {
 export default function Home() {
   return (
     <div className="page-overflow-clip">
-      <Loader />
       <Nav />
 
       <section id="hero" className="home-hero">
+        <HeroCookies />
         <div className="home-hero-inner">
-          <h1>
-            The <span className="stroke-outline">sweet</span> indulgence that makes diets nervous.
-          </h1>
-          <Link className="shop-btn home-shop-btn" to="/shop">
+          <BuildText
+            as="h1"
+            className="home-hero-title"
+            startDelay={0.58}
+            letterDelay={0.02}
+            parts={[
+              { text: 'The ' },
+              { text: 'sweet', className: 'stroke-outline' },
+              { text: ' indulgence that makes diets nervous.' },
+            ]}
+          />
+          <Link className="shop-btn home-shop-btn home-shop-btn-reveal" to="/shop">
             Shop Now{' '}
             <span className="arr">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -175,9 +204,9 @@ export default function Home() {
       <div style={{ height: 26, background: '#F5ECDD' }} />
 
       <section id="favourites" className="home-favourites">
-        <div className="home-favourites-grid">
+        <div className="product-cards-grid">
           {favs.map((p) => (
-            <div key={p.id} className="home-fav-item">
+            <div key={p.id} className="product-cards-grid-item">
               <ProductCard {...p} />
             </div>
           ))}

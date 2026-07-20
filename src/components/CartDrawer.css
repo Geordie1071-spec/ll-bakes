@@ -106,9 +106,21 @@
   width: 96px;
   height: 96px;
   border-radius: 12px;
-  background: #e7d9bd;
-  background-image: radial-gradient(#d6c19c 22%, transparent 23%);
-  background-size: 14px 14px;
+  background: #231F20;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.cart-line-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .35));
 }
 
 .cart-line-body {

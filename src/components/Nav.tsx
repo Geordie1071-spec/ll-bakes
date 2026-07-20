@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Letters from './Letters';
 import { useCart } from '../lib/CartContext';
-import cookieImg from '../assets/cookie.png';
 import logoImg from '../assets/logo.png';
 import './Nav.css';
 
@@ -14,10 +13,8 @@ interface Tab {
 
 const TABS: Tab[] = [
   { label: 'Shop', href: '/shop', key: 'shop' },
-  { label: 'Custom Order', href: '/contact', key: 'custom' },
   { label: 'About', href: '/about', key: 'about' },
   { label: 'Contact', href: '/contact', key: 'contact' },
-  { label: 'FAQ', href: '/#faq', key: 'faq' },
 ];
 
 function activeKeyForPath(pathname: string): string {
@@ -27,11 +24,7 @@ function activeKeyForPath(pathname: string): string {
   return '';
 }
 
-interface NavProps {
-  showCookie?: boolean;
-}
-
-export default function Nav({ showCookie = false }: NavProps) {
+export default function Nav() {
   const { pathname } = useLocation();
   const { count, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
@@ -63,19 +56,11 @@ export default function Nav({ showCookie = false }: NavProps) {
     <div className="nav-root">
       {/* FULL NAV */}
       <nav className={`nav-full${compact ? ' nav-hidden' : ''}`}>
-        {showCookie && (
-          <img
-            className="nav-cookie"
-            src={cookieImg}
-            alt=""
-            style={{ position: 'absolute', left: '22%', top: -74, transform: 'translateX(-50%) rotate(-4deg)', width: 150, height: 'auto', pointerEvents: 'auto', filter: 'drop-shadow(0 10px 18px rgba(0,0,0,.28))', zIndex: 1, cursor: 'pointer' }}
-          />
-        )}
         <Link to="/" className="nav-logo-link">
-          <img src={logoImg} alt="Laura & Lara" style={{ height: 100, width: 'auto', display: 'block' }} />
+          <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-full" />
         </Link>
         <div style={{ flex: 1 }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
+        <div className="nav-tabs">
           {TABS.map((t) => (
             <Link key={t.key} className="ll-tab" to={t.href} data-on={active === t.key}>
               <span className="ll-tab-text"><Letters text={t.label} className="ltr" /></span>
@@ -92,13 +77,13 @@ export default function Nav({ showCookie = false }: NavProps) {
       {/* COMPACT NAV */}
       <nav className={`nav-compact${compact ? '' : ' nav-hidden'}`}>
         <Link to="/" className="nav-logo-link">
-          <img src={logoImg} alt="Laura & Lara" style={{ height: 60, width: 'auto', display: 'block' }} />
+          <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-compact" />
         </Link>
         <div style={{ flex: 1 }} />
         <div className="nav-compact-pill">
-          <button onClick={openCart} className="ic-btn nav-get-sweets" type="button">
-            <span>Get Sweets</span>
-          </button>
+          <Link to="/shop" className="ic-btn nav-shop-btn">
+            <span>Shop</span>
+          </Link>
           <button onClick={openCart} aria-label="Cart" className="ic-btn nav-icon-btn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1" />
@@ -119,7 +104,10 @@ export default function Nav({ showCookie = false }: NavProps) {
 
       {/* FULLSCREEN MENU */}
       <div className={`nav-menu${menuOpen ? ' nav-menu-open' : ''}`}>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div className="nav-menu-top">
+          <Link to="/" className="nav-menu-logo" onClick={() => setMenuOpen(false)}>
+            <img src={logoImg} alt="Laura & Lara" className="nav-logo nav-logo-menu" />
+          </Link>
           <button onClick={() => setMenuOpen(false)} aria-label="Close" className="ic-btn nav-menu-close">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round">
               <path d="M5 5l14 14" />

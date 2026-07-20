@@ -3,19 +3,6 @@
   --wave-dur: 18s;
 }
 
-.home-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  pointer-events: none;
-}
-.home-loader div {
-  flex: 1;
-  height: 100%;
-  animation: peelUp .8s cubic-bezier(.76,0,.24,1) forwards;
-}
-
 .home-hero {
   position: relative;
   padding: 150px 40px 70px;
@@ -27,6 +14,47 @@
   overflow: hidden;
   margin-top: -100px;
 }
+
+.home-hero-cookies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-hero-cookie {
+  position: absolute;
+  height: auto;
+  opacity: 0.34;
+  transform: rotate(var(--cookie-rotate, 0deg));
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.08));
+  will-change: transform;
+}
+
+.home-hero-cookie-1 {
+  animation: floaty 6.8s ease-in-out infinite;
+}
+.home-hero-cookie-2 {
+  animation: floaty2 7.4s ease-in-out infinite;
+  animation-delay: -1.2s;
+}
+.home-hero-cookie-3 {
+  animation: floaty 7.8s ease-in-out infinite;
+  animation-delay: -2.4s;
+}
+.home-hero-cookie-4 {
+  animation: floaty2 6.2s ease-in-out infinite;
+  animation-delay: -0.8s;
+}
+.home-hero-cookie-5 {
+  animation: floaty 8.2s ease-in-out infinite;
+  animation-delay: -3s;
+}
+.home-hero-cookie-6 {
+  animation: floaty2 7s ease-in-out infinite;
+  animation-delay: -1.6s;
+}
+
 .home-hero-inner {
   text-align: center;
   position: relative;
@@ -34,7 +62,8 @@
   max-width: 1120px;
   margin: 0 auto;
 }
-.home-hero h1 {
+.home-hero h1,
+.home-hero-title {
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
   font-size: clamp(54px, 10vw, 150px);
@@ -44,6 +73,19 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   -webkit-text-stroke: 2px currentColor;
+}
+
+.home-shop-btn-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroBtnReveal 0.55s cubic-bezier(0.33, 1, 0.68, 1) 1.55s forwards;
+}
+
+@keyframes heroBtnReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .home-shop-btn {
   display: inline-flex;
@@ -60,31 +102,22 @@
   padding: 18px 48px;
   border-radius: 16px;
   text-decoration: none;
-  box-shadow: 0 10px 26px rgba(0,0,0,.22);
-  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 4px 4px 0 #000;
+  transition: transform .12s, box-shadow .12s, background .12s, color .12s;
 }
 .home-shop-btn:hover {
-  transform: translateY(-4px);
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
+  background: #E83F6A;
+  color: #F5ECDD;
 }
 .home-shop-btn:active {
-  transform: scale(.96);
+  transform: scale(.98);
 }
 
 .home-favourites {
   background: #F5ECDD;
   padding: 26px 0 46px;
-}
-.home-favourites-grid {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  gap: 28px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
-.home-fav-item {
-  flex: 1 1 440px;
 }
 
 .home-wave {
@@ -105,36 +138,40 @@
 
 .home-testimonials {
   background: #E83F6A;
-  padding: 76px 40px 90px;
+  padding: 76px 0 90px;
 }
 .home-testimonials-head {
   margin: 0 auto 44px;
   text-align: center;
+  padding: 0 24px;
 }
 .home-reviews-heading {
   font-family: 'Boogaloo', sans-serif;
   font-weight: 400;
-  font-size: clamp(80px, 26vw, 400px);
+  font-size: clamp(56px, 18vw, 400px);
   line-height: .84;
-  margin: 0;
+  margin: 0 auto;
   color: transparent;
   -webkit-text-stroke: 4px #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
-  width: 100%;
+  white-space: nowrap;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .reviews-drag {
   overflow-x: auto;
   overflow-y: hidden;
   cursor: grab;
-  padding: 6px 40px 24px;
+  padding: 6px 0 24px;
 }
 .reviews-track {
   display: flex;
   width: max-content;
   gap: 32px;
   user-select: none;
+  padding: 0 16px;
 }
 .review-card {
   flex: none;
@@ -277,6 +314,31 @@
 
 @media (max-width: 640px) {
   .home-hero {
-    padding: 120px 24px 50px;
+    padding: 120px 20px 50px;
+  }
+  .home-hero-inner {
+    max-width: 100%;
+  }
+  .home-hero h1,
+  .home-hero-title {
+    font-size: clamp(28px, 7.8vw, 44px);
+    line-height: 1.08;
+    letter-spacing: 0.5px;
+    -webkit-text-stroke: 1px currentColor;
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+  .home-shop-btn {
+    font-size: 18px;
+    padding: 16px 32px;
+    letter-spacing: 1px;
+  }
+  .home-hero-cookie {
+    opacity: 0.28;
+  }
+  .home-reviews-heading {
+    font-size: clamp(42px, 13vw, 72px);
+    -webkit-text-stroke: 2.5px #fff;
+    letter-spacing: 1px;
   }
 }

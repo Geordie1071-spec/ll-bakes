@@ -1,0 +1,84 @@
+.shop-header-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shop-decor-item {
+  position: absolute;
+  pointer-events: auto;
+  cursor: default;
+  opacity: 0.32;
+  transform:
+    translate3d(var(--hover-x, 0px), var(--hover-y, 0px), 0)
+    rotate(var(--decor-rotate, 0deg));
+  transition:
+    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity 0.3s ease;
+  will-change: transform;
+}
+
+.shop-decor-float {
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.shop-decor-flour .shop-decor-float {
+  animation-name: shopDecorFloatA;
+}
+
+.shop-decor-sugar .shop-decor-float {
+  animation-name: shopDecorFloatB;
+  animation-delay: -1.4s;
+}
+
+.shop-decor-chocolate .shop-decor-float {
+  animation-name: shopDecorFloatA;
+  animation-delay: -2.8s;
+}
+
+.shop-decor-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.08));
+  user-select: none;
+  pointer-events: none;
+}
+
+.shop-decor-item:hover,
+.shop-decor-item[data-hovered='true'] {
+  opacity: 0.44;
+}
+
+@keyframes shopDecorFloatA {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shopDecorFloatB {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(8px, -6px);
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-decor-item {
+    opacity: 0.26;
+  }
+
+  .shop-decor-chocolate {
+    bottom: 2%;
+    left: 2%;
+    width: clamp(96px, 24vw, 140px) !important;
+  }
+}

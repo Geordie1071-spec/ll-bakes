@@ -4,24 +4,41 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import ImageSlot from '../components/ImageSlot';
-import { categoryColor, getProduct, productBadges, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
+import { getProduct, products, sizeLabels, sizeRatios, tasteNotesFor } from '../lib/products';
 import { useCart } from '../lib/CartContext';
 import './Product.css';
 
-const shots = ['main photo', 'slice photo', 'top-down photo', 'detail photo'];
+function ArrowLeftIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="M12 5l7 7-7 7" />
+    </svg>
+  );
+}
 
 export default function Product() {
   const { id } = useParams<{ id: string }>();
   const product = getProduct(id);
   const { addToCart } = useCart();
 
-  const [shot, setShot] = useState(0);
   const [sizeIdx, setSizeIdx] = useState(0);
   const [qty, setQty] = useState(1);
+  const [slideDir, setSlideDir] = useState<'next' | 'prev'>('next');
+  const [galleryKey, setGalleryKey] = useState(0);
 
   const related = useMemo(() => {
     if (!product) return [];
-    return products.filter((p) => p.id !== product.id).slice(0, 4);
+    return products.filter((p) => p.id !== product.id).slice(0, 3);
   }, [product]);
 
   if (!product) return <Navigate to="/shop" replace />;
@@ -33,49 +50,52 @@ export default function Product() {
   const variantId = isCake ? `${product.id}-${sizeIdx}` : product.id;
   const variantSub = isCake ? sizeLabels[sizeIdx] : product.sub;
 
-  const onAdd = () => addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty });
+  const onAdd = () =>
+    addToCart({ id: variantId, name: product.name, sub: variantSub, price: sizePrice, qty, image: product.image });
+
+  const goPrev = () => {
+    setSlideDir('prev');
+    setGalleryKey((k) => k + 1);
+  };
+
+  const goNext = () => {
+    setSlideDir('next');
+    setGalleryKey((k) => k + 1);
+  };
 
   return (
     <div className="page-overflow-clip">
       <Nav />
 
-      <div className="product-breadcrumb">
-        <Link to="/shop">Shop</Link>
-        <span className="crumb-sep">/</span>
-        <Link to="/shop">{product.cat}</Link>
-        <span className="crumb-sep">/</span>
-        <span className="crumb-current">{product.name}</span>
-      </div>
+      <Link to="/shop" className="product-back-btn">
+        <span aria-hidden="true">&larr;</span>
+        <span>Back to Shop</span>
+      </Link>
 
       <section className="product-detail">
+        <h1 className="product-title">{product.name}</h1>
+
         <div className="product-gallery">
           <div className="product-gallery-main">
-            <ImageSlot shape="rect" placeholder={`${product.placeholder} — ${shots[shot]}`} />
+            <div key={galleryKey} className={`product-gallery-slide product-gallery-slide-${slideDir}`}>
+              {product.image ? (
+                <img src={product.image} alt={product.name} className="product-gallery-photo" />
+              ) : (
+                <ImageSlot shape="rect" placeholder={product.placeholder} />
+              )}
+            </div>
             <div className="product-gallery-nav">
-              <button onClick={() => setShot((s) => (s + shots.length - 1) % shots.length)} aria-label="Previous" type="button">
-                &larr;
+              <button onClick={goPrev} aria-label="Previous image" type="button">
+                <ArrowLeftIcon />
               </button>
-              <button onClick={() => setShot((s) => (s + 1) % shots.length)} aria-label="Next" type="button">
-                &rarr;
+              <button onClick={goNext} aria-label="Next image" type="button">
+                <ArrowRightIcon />
               </button>
             </div>
-            <span className="product-gallery-tag">{shots[shot]}</span>
-          </div>
-          <div className="product-float product-float-1">
-            <ImageSlot shape="circle" placeholder="treat" />
-          </div>
-          <div className="product-float product-float-2">
-            <ImageSlot shape="circle" placeholder="berry" />
-          </div>
-          <div className="product-float product-float-3">
-            <ImageSlot shape="circle" placeholder="crumb" />
           </div>
         </div>
 
         <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="product-tagline">Meet the treat that steals the party</p>
-
           <div className="product-info-cards">
             <div className="product-info-card">
               <div className="product-info-card-title">Taste Profile</div>
@@ -92,15 +112,6 @@ export default function Product() {
               <div className="product-info-card-title">Perfect For</div>
               <p>Birthdays, baby showers, anniversaries, celebrations, afternoon tea, or any Tuesday that deserves a little something sweet.</p>
             </div>
-          </div>
-
-          <div className="product-badges">
-            {productBadges.map((b) => (
-              <div key={b.label} className="product-badge">
-                <div className="product-badge-icon" dangerouslySetInnerHTML={{ __html: b.icon }} />
-                <div className="product-badge-label">{b.label}</div>
-              </div>
-            ))}
           </div>
 
           <div className="product-controls">
@@ -129,16 +140,18 @@ export default function Product() {
 
           <button onClick={onAdd} className="product-add-btn" type="button">
             <span>Add to Cart</span>
-            <span>${total}.00</span>
+            <span className="product-card-price">${total}.00</span>
           </button>
         </div>
       </section>
 
       <section className="product-related">
         <h2>You Might Also Love</h2>
-        <div className="product-related-grid">
+        <div className="product-cards-grid">
           {related.map((p) => (
-            <ProductCard key={p.id} id={p.id} name={p.name} sub={p.sub} price={p.price} tag={p.tag || undefined} cardBg={categoryColor[p.cat]} placeholder={p.placeholder} />
+            <div key={p.id} className="product-cards-grid-item">
+              <ProductCard id={p.id} name={p.name} sub={p.sub} price={p.price} placeholder={p.placeholder} image={p.image} />
+            </div>
           ))}
         </div>
       </section>
